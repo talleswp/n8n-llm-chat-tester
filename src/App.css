@@ -1,0 +1,306 @@
+/* Reset básico */
+:root {
+  --bg-color: #131314;
+  --surface-color: #1E1F20;
+  --surface-hover: #2a2b2e;
+  --text-primary: #E3E3E3;
+  --text-secondary: #9aa0a6;
+  --accent-color: #a8c7fa;
+  --border-color: #444746;
+  --user-bubble-bg: #2b2c2e;
+  --danger-color: #ff6b6b;
+  
+  /* Largura da coluna central de leitura */
+  --content-width: 900px; 
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow: hidden; /* Evita scroll na janela principal */
+}
+
+/* Container Principal */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+/* Header */
+.header {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.session-id {
+  font-family: monospace;
+  opacity: 0.5;
+}
+
+/* Lista de Chat (Scrollable) */
+.chat-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 100px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: var(--content-width); /* Coluna central */
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Mensagens (Bubbles) */
+.bubble-row {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+}
+
+.bubble-row.user {
+  align-self: flex-end;
+}
+
+.bubble-row.ai {
+  align-self: flex-start;
+}
+
+.bubble {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  font-size: 16px;
+}
+
+.bubble.user-content {
+  background-color: var(--user-bubble-bg);
+  color: var(--text-primary);
+  padding: 14px 24px;
+  border-radius: 24px 24px 4px 24px;
+}
+
+.bubble.ai-content {
+  background-color: transparent;
+  padding: 0 10px;
+}
+
+.file-attachment {
+  font-size: 0.85em;
+  margin-bottom: 8px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.05);
+  padding: 6px 12px;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+/* Wrapper do Input (Centralizado ou Bottom) */
+.input-wrapper {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: all 0.5s ease;
+  box-sizing: border-box;
+}
+
+.input-wrapper.centered {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Texto Hero (Aparece só quando vazio) */
+.hero-text {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: -1px;
+  
+  /* Efeito Gradiente Gemini */
+  background: linear-gradient(90deg, #4285f4, #9b72cb, #d96570);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Caixa de Input Visual */
+.input-box {
+  background-color: var(--surface-color);
+  border-radius: 32px;
+  padding: 8px 16px; /* Padding reduzido para ficar compacto */
+  display: flex;
+  align-items: center; /* CENTRALIZA VERTICALMENTE OS BOTOES */
+  border: 1px solid var(--border-color);
+  position: relative;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+  width: 100%;
+  min-height: 60px; /* Altura mínima elegante */
+}
+
+.input-box.dragging {
+  background-color: var(--surface-hover);
+  border: 2px dashed var(--accent-color);
+}
+
+.input-box:focus-within {
+  border-color: #555;
+  background-color: var(--surface-hover);
+}
+
+/* Textarea */
+.chat-textarea {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 16px;
+  padding: 10px 12px;
+  resize: none;
+  max-height: 200px;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+/* Botões */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.icon-button:hover {
+  background-color: rgba(255,255,255,0.05);
+  color: var(--text-primary);
+}
+
+.send-button {
+  background-color: #3a3a3a;
+  color: #888;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  cursor: default;
+  transition: all 0.2s;
+}
+
+.send-button.active {
+  background-color: var(--text-primary);
+  color: var(--bg-color);
+  cursor: pointer;
+}
+
+/* Preview de Arquivo */
+.file-preview-float {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  background-color: var(--surface-color);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 5;
+  animation: fadeIn 0.3s ease;
+}
+
+.remove-file-btn {
+  background: none;
+  border: none;
+  color: var(--danger-color);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 4px;
+}
+
+/* Overlay de Drag */
+.drag-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 32px;
+  background-color: rgba(30,31,32, 0.9);
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Animações e Scrollbar */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.typing-indicator {
+  opacity: 0.6;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
