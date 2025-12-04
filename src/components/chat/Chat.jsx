@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useChat } from '../../hooks/useChat';
-import { useThreads } from '../../hooks/useThreads';
 import Sidebar from '../sidebar/Sidebar';
 import './Chat.css';
 
 const Chat = () => {
   const { user, logout } = useAuth();
-  const { activeThreadId } = useThreads();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const {
     messages,
