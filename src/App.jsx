@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthProvider from './context/AuthContext.jsx';
+import ThreadProvider from './context/ThreadContext.jsx';
 import { useAuth } from './hooks/useAuth';
 import Login from './components/login/Login.jsx';
 import Chat from './components/chat/Chat.jsx';
@@ -25,7 +26,11 @@ const AppContent = () => {
     );
   }
 
-  return isAuthenticated() ? <Chat /> : <Login />;
+  return isAuthenticated() ? (
+    <ThreadProvider>
+      <Chat />
+    </ThreadProvider>
+  ) : <Login />;
 };
 
 /**

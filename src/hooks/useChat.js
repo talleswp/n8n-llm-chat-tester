@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { chatService } from '../services/api.service';
 import { useAuth } from './useAuth';
+import { useThreads } from './useThreads';
 
 /**
  * Hook personalizado para gerenciar toda a lógica do chat
@@ -8,9 +9,9 @@ import { useAuth } from './useAuth';
  */
 export const useChat = () => {
   const { token } = useAuth();
+  const { activeThreadId, upsertThread, selectThread, loadThreadHistory } = useThreads();
   
   // Estados
-  const [sessionId] = useState(() => `sess-${Math.random().toString(36).substr(2, 6)}`);
   const [messages, setMessages] = useState([]);
   const [prompt, setPrompt] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -79,6 +80,45 @@ export const useChat = () => {
   };
 
   /**
+   * Carrega histórico de uma thread
+   */
+  const loadHistory = async (threadId) => {
+    setIsLoading(true);
+    try {
+      const data = await loadThreadHistory(threadId);
+      
+      // Converte o formato do backend para o formato do frontend
+      const formattedMessages = [];
+      if (data.messages && Array.isArray(data.messages)) {
+        data.messages.forEach(msg => {
+          formattedMessages.push({ role: 'user', content: msg.human });
+          formattedMessages.push({ role: 'ai', content: msg.ai });
+        });
+      }
+      
+      setMessages(formattedMessages);
+    } catch (error) {
+      console.error('Erro ao carregar histórico:', error);
+      setMessages([{
+        role: 'ai',
+        content: 'Erro ao carregar histórico da conversa.',
+        isError: true,
+      }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  /**
+   * Limpa mensagens (para nova conversa)
+   */
+  const clearMessages = () => {
+    setMessages([]);
+    setPrompt('');
+    setSelectedFile(null);
+  };
+
+  /**
    * Envia mensagem para o backend
    */
   const handleSubmit = async () => {
@@ -105,13 +145,24 @@ export const useChat = () => {
     try {
       const data = await chatService.sendMessage(
         currentPrompt,
-        sessionId,
+        activeThreadId,
         currentFile,
         token
       );
 
       // Extrai resposta de vários formatos possíveis do n8n
       const aiContent = data.message || data.output || data.text || JSON.stringify(data);
+      
+      // Se retornou thread_id novo, atualiza a lista de threads e seleciona como ativa
+      if (data.thread_id && !activeThreadId) {
+        const newThread = {
+          thread_id: data.thread_id,
+          name: currentPrompt.substring(0, 50) + (currentPrompt.length > 50 ? '...' : ''),
+          updatedAt: new Date().toISOString(),
+        };
+        upsertThread(newThread);
+        selectThread(data.thread_id); // Seleciona a nova thread como ativa
+      }
 
       setMessages(prev => [...prev, { role: 'ai', content: aiContent }]);
 
@@ -127,9 +178,18 @@ export const useChat = () => {
     }
   };
 
+  // Carrega histórico quando thread ativa muda
+  useEffect(() => {
+    if (activeThreadId) {
+      loadHistory(activeThreadId);
+    } else {
+      clearMessages();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeThreadId]);
+
   return {
     // Estados
-    sessionId,
     messages,
     prompt,
     selectedFile,
@@ -150,5 +210,6 @@ export const useChat = () => {
     handleFileRemove,
     handlePromptChange,
     handleSubmit,
+    clearMessages,
   };
 };
