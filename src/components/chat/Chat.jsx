@@ -34,7 +34,7 @@ const Chat = () => {
           <span className="user-info">{user?.name || user?.email}</span>
           <span className="session-id">{sessionId}</span>
           <button className="logout-button" onClick={logout} title="Sair">
-            🚪
+            <i class="bi bi-box-arrow-right"></i>
           </button>
         </div>
       </div>
