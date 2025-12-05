@@ -46,7 +46,7 @@ const Chat = () => {
             <span className="brand">n8n Workspace</span>
           </div>
           <div className="header-right">
-            <span className="user-info">{user?.name || user?.email}</span>
+            <span className="user-info"><i class="bi bi-person-square me-2"></i>{user?.name || user?.email}</span>
             <button className="sidebar-toggle-header" onClick={logout} title="Sair">
               <i class="bi bi-box-arrow-right"></i>
             </button>

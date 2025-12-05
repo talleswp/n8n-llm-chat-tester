@@ -19,7 +19,7 @@ const Sidebar = ({ isOpen }) => {
       {/* Header da Sidebar */}
       <div className="sidebar-header">
         <button className="new-chat-button" onClick={handleNewChat} title="Nova conversa">
-          <span>✏️</span>
+          <span><i class="bi bi-pencil-square"></i></span>
           <span>Nova Conversa</span>
         </button>
       </div>

@@ -8,7 +8,7 @@ const ThreadItem = ({ thread, isActive, onClick }) => {
       className={`thread-item ${isActive ? 'active' : ''}`}
       onClick={onClick}
     >
-      <div className="thread-icon">💬</div>
+      <div className="thread-icon"><i class="bi bi-chat-left-text"></i></div>
       <div className="thread-content">
         <div className="thread-name">{thread.name}</div>
         {thread.updatedAt && (
