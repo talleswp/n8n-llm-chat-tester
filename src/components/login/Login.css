@@ -149,10 +149,40 @@
 
 .login-footer {
   margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
   text-align: center;
 }
 
 .login-footer p {
+  font-size: 14px;
+  color: #9aa0a6;
+  margin: 0 0 8px 0;
+}
+
+.register-link {
+  background: none;
+  border: none;
+  color: #a8c7fa;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.register-link:hover {
+  background: rgba(168, 199, 250, 0.1);
+  text-decoration: underline;
+}
+
+.login-disclaimer {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.login-disclaimer p {
   font-size: 13px;
   color: #666;
   margin: 0;

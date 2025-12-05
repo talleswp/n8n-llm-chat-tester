@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AuthProvider from './context/AuthContext.jsx';
 import ThreadProvider from './context/ThreadContext.jsx';
 import { useAuth } from './hooks/useAuth';
 import Login from './components/login/Login.jsx';
+import Register from './components/register/Register.jsx';
 import Chat from './components/chat/Chat.jsx';
 
 /**
@@ -10,6 +11,7 @@ import Chat from './components/chat/Chat.jsx';
  */
 const AppContent = () => {
   const { isAuthenticated, isLoading } = useAuth();
+  const [showRegister, setShowRegister] = useState(false);
 
   if (isLoading) {
     return (
@@ -26,11 +28,19 @@ const AppContent = () => {
     );
   }
 
-  return isAuthenticated() ? (
-    <ThreadProvider>
-      <Chat />
-    </ThreadProvider>
-  ) : <Login />;
+  if (isAuthenticated()) {
+    return (
+      <ThreadProvider>
+        <Chat />
+      </ThreadProvider>
+    );
+  }
+
+  return showRegister ? (
+    <Register onBackToLogin={() => setShowRegister(false)} />
+  ) : (
+    <Login onRegisterClick={() => setShowRegister(true)} />
+  );
 };
 
 /**

@@ -4,7 +4,7 @@ import EmailInput from '../common/EmailInput';
 import PasswordInput from '../common/PasswordInput';
 import './Login.css';
 
-const Login = () => {
+const Login = ({ onRegisterClick }) => {
   const { login, isLoading, error } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -76,6 +76,17 @@ const Login = () => {
         </form>
 
         <div className="login-footer">
+          <p>Não tem uma conta?</p>
+          <button 
+            type="button"
+            className="register-link"
+            onClick={onRegisterClick}
+          >
+            Criar conta gratuita
+          </button>
+        </div>
+
+        <div className="login-disclaimer">
           <p>A IA pode cometer erros. Verifique informações importantes.</p>
         </div>
       </div>

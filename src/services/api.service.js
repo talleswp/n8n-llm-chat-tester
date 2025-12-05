@@ -30,6 +30,30 @@ export const authService = {
   },
 
   /**
+   * Cria novo usuário
+   * @param {string} name 
+   * @param {string} email 
+   * @param {string} password 
+   * @returns {Promise<{message: string}>}
+   */
+  async createUser(name, email, password) {
+    const response = await fetch(`${API_BASE_URL}/user/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `Erro ${response.status}: Falha ao criar usuário`);
+    }
+
+    return response.json();
+  },
+
+  /**
    * Valida o token JWT (opcional - se o backend tiver endpoint)
    * @param {string} token 
    * @returns {Promise<{valid: boolean, user: object}>}
