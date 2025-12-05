@@ -41,13 +41,13 @@ const Chat = () => {
         <div className="header">
           <div className="header-left">
             <button className="sidebar-toggle-header" onClick={toggleSidebar} title={isSidebarOpen ? "Fechar menu" : "Abrir menu"}>
-              ☰
+              <i class="bi bi-list"></i>
             </button>
             <span className="brand">n8n Workspace</span>
           </div>
           <div className="header-right">
             <span className="user-info">{user?.name || user?.email}</span>
-            <button className="logout-button" onClick={logout} title="Sair">
+            <button className="sidebar-toggle-header" onClick={logout} title="Sair">
               <i class="bi bi-box-arrow-right"></i>
             </button>
           </div>
