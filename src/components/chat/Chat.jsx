@@ -117,9 +117,10 @@ const Chat = () => {
           )}
 
           {/* Botão de Anexo (Clipe) */}
-          <label className="icon-button" title="Anexar arquivo">
+          <label className="icon-button" title="Anexar imagem">
             <input
               type="file"
+              accept="image/*"
               style={{ display: 'none' }}
               onChange={(e) => handleFileSelect(e.target.files[0])}
             />
