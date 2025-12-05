@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useChat } from '../../hooks/useChat';
+import Sidebar from '../sidebar/Sidebar';
 import './Chat.css';
 
 const Chat = () => {
   const { user, logout } = useAuth();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const {
-    sessionId,
     messages,
     prompt,
     selectedFile,
@@ -25,19 +26,32 @@ const Chat = () => {
     handleSubmit,
   } = useChat();
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <div className="app-container">
-      {/* Header */}
-      <div className="header">
-        <span className="brand">n8n Workspace</span>
-        <div className="header-right">
-          <span className="user-info">{user?.name || user?.email}</span>
-          <span className="session-id">{sessionId}</span>
-          <button className="logout-button" onClick={logout} title="Sair">
-            <i class="bi bi-box-arrow-right"></i>
-          </button>
+    <div className="app-layout">
+      {/* Sidebar */}
+      <Sidebar isOpen={isSidebarOpen} />
+
+      {/* Main Chat Area */}
+      <div className={`app-container ${!isSidebarOpen ? 'sidebar-closed' : ''}`}>
+        {/* Header */}
+        <div className="header">
+          <div className="header-left">
+            <button className="sidebar-toggle-header" onClick={toggleSidebar} title={isSidebarOpen ? "Fechar menu" : "Abrir menu"}>
+              ☰
+            </button>
+            <span className="brand">n8n Workspace</span>
+          </div>
+          <div className="header-right">
+            <span className="user-info">{user?.name || user?.email}</span>
+            <button className="logout-button" onClick={logout} title="Sair">
+              <i class="bi bi-box-arrow-right"></i>
+            </button>
+          </div>
         </div>
-      </div>
 
       {/* Lista de Mensagens */}
       {hasMessages && (
@@ -144,6 +158,7 @@ const Chat = () => {
             A IA pode cometer erros. Verifique informações importantes.
           </div>
         )}
+      </div>
       </div>
     </div>
   );
