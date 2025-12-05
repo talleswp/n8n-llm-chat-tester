@@ -1,6 +1,6 @@
 // Centraliza todas as chamadas HTTP para o backend
 
-const API_BASE_URL = 'https://automacao.tizarlabs.app';
+const API_BASE_URL = 'https://automacao.tizarlabs.app/webhook';
 
 /**
  * Serviço de autenticação
@@ -13,7 +13,7 @@ export const authService = {
    * @returns {Promise<{token: string, user: object}>}
    */
   async login(email, password) {
-    const response = await fetch(`${API_BASE_URL}/webhook/n8n/llmchat/auth`, {
+    const response = await fetch(`${API_BASE_URL}/llmchat/auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const authService = {
    * @returns {Promise<{valid: boolean, user: object}>}
    */
   async validateToken(token) {
-    const response = await fetch(`${API_BASE_URL}/webhook/n8n/llmchat/auth/validate-token`, {
+    const response = await fetch(`${API_BASE_URL}/llmchat/auth/validate-token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export const chatService = {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const response = await fetch(`${API_BASE_URL}/webhook/llm-chat`, {
+    const response = await fetch(`${API_BASE_URL}/llmchat/chat`, {
       method: 'POST',
       headers,
       body: formData,
