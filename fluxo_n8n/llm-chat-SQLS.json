@@ -1,0 +1,1340 @@
+{
+  "name": "llm-chat-SQLS",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Chat').item.json.body.chatInput }}",
+        "options": {
+          "passthroughBinaryImages": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1680,
+        -400
+      ],
+      "id": "a368e7d2-41dc-4fe8-808f-a38a6bbc3ad5",
+      "name": "AI Agent",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        -192
+      ],
+      "id": "ea054964-b17b-4d88-a8a8-b43c6a9ef2ab",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "83KH8WZR75xMS3gR",
+          "name": "Gemini(PaLM)-API-rwr_01"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "624b3b7a-6a7c-423e-9e60-418969715811",
+              "name": "output",
+              "value": "={{ $('AI Agent').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "286c4d90-fe38-40ef-90e7-f60310b7fdf2",
+              "name": "thread_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "61132193-d114-446c-95fb-20d410e9c464",
+              "name": "created_at",
+              "value": "={{ $json.created_at }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2240,
+        -400
+      ],
+      "id": "ac5e8378-119c-4f58-ba46-90079263383e",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2448,
+        -400
+      ],
+      "id": "0ef07d36-dd3b-4504-8703-907917b0c310",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/llmchat/chat",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        352,
+        -368
+      ],
+      "id": "e5426696-656f-40da-ac16-7f033f98e4da",
+      "name": "Chat",
+      "webhookId": "9dc8b41f-8954-49f4-9d2a-979345f75c9c"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"token\": \"{{ $json.token }}\",\n  \"user\": {\n            \"id\": \"{{ $('Get a row').item.json.id }}\",\n            \"email\": \"{{ $('Get a row').item.json.email }}\", \n            \"name\": \"{{ $('Get a row').item.json.name }}\"\n          }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1392,
+        -1024
+      ],
+      "id": "6212dbe4-f7b8-4d8c-bdcc-030150a77a1f",
+      "name": "Respond to Auth"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/llmchat/auth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        352,
+        -944
+      ],
+      "id": "de37ca40-7826-448e-9a34-8174a76c9dcd",
+      "name": "Auth",
+      "webhookId": "143ac197-02c3-4e27-8954-8793bc413243"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "users",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "keyValue": "={{ $json.body.email }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -944
+      ],
+      "id": "d6632263-54ad-4bfc-a459-148e428b64e5",
+      "name": "Get a row",
+      "alwaysOutputData": true,
+      "executeOnce": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "rJ2HjL71tbFktPGf",
+          "name": "n8n-llm-chat"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "type": "SHA3-256",
+        "value": "={{ $json.body.password }}",
+        "dataPropertyName": "password_hash"
+      },
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        560,
+        -944
+      ],
+      "id": "7f010705-6c7c-49a4-90d6-ead7d5750b44",
+      "name": "password_hash"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Este é um exemplo simplificado para a palestra.\n// Ele pega o timestamp atual e codifica em Base64 para parecer um token.\n\nconst payload = {\n  sub: $input.first().json.id,\n  email: $input.first().json.email,\n  name: $input.first().json.name,\n  exp: (Date.now() / 1000) + 7200 // Expira em 2 horas\n};\n\n// Codifica o payload JSON em uma string Base64 para simular o formato JWT\nconst tokenSimulado = btoa(JSON.stringify(payload));\n\n\nreturn [{ json: { token: tokenSimulado } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1184,
+        -1024
+      ],
+      "id": "d50ae14a-59e0-4187-a611-7b77be646641",
+      "name": "Codifica Token"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "llmchat/auth/validate-token",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        352,
+        -640
+      ],
+      "id": "81a49bce-7a60-4d1f-9c2a-cf1837014205",
+      "name": "Valida Token",
+      "webhookId": "3b35fa9d-1774-4f92-9989-e56dea043436",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pega o header Authorization enviado pelo React\nconst authHeader = $input.first().json.headers.authorization;\n\nif (!authHeader) {\n  throw new Error('Header Authorization não encontrado');\n}\n\n// Remove o prefixo \"Bearer \" para pegar só o hash\nconst tokenRecebido = authHeader.replace('Bearer ', '').trim();\n\ntry {\n  // 1. Decodifica Base64 para String (Simulando a verificação de assinatura)\n  // No Node.js do n8n, usamos Buffer em vez de atob()\n  const jsonString = Buffer.from(tokenRecebido, 'base64').toString('utf-8');\n  \n  // 2. Transforma em Objeto JSON\n  const payload = JSON.parse(jsonString);\n\n  // 3. Verifica Expiração (Timestamp atual em segundos vs payload.exp)\n  const agora = Math.floor(Date.now() / 1000);\n  \n  if (payload.exp < agora) {\n    // Se o token venceu, retornamos valid: false\n    return {\n      json: {\n        valid: false,\n        message: 'Token expirado'\n      }\n    };\n  }\n\n  // 4. Se chegou aqui, é válido! Retornamos os dados do usuário para o front\n  return {\n    json: {\n      valid: true,\n      user: {\n        //id: payload.sub,\n        email: payload.email,\n        name: payload.name\n      }\n    }\n  };\n\n} catch (error) {\n  // Se o token for lixo ou mal formatado, cai aqui\n  return {\n    json: {\n      valid: false,\n      message: 'Token inválido ou mal formatado'\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        -640
+      ],
+      "id": "abbe4934-584f-4c69-b2df-b28d675cac17",
+      "name": "Verifica Token"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"valid\": \"{{ $json.valid }}\"\n}",
+        "options": {
+          "responseCode": "={{ $json.valid ? 200 : 401 }}"
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        768,
+        -640
+      ],
+      "id": "c6611e8a-20dd-4f80-bfec-1f0546268245",
+      "name": "Retorna Validacao"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d6546914-8f14-4341-9a5b-3d1e3bc4501d",
+              "leftValue": "={{ $json.password_hash }}",
+              "rightValue": "={{ $('password_hash').item.json.password_hash }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        976,
+        -944
+      ],
+      "id": "a3dc9dc7-94bd-4fd8-a379-cbe795d25a6f",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"message\": \"Usuário ou senha incorretos\"\n}",
+        "options": {
+          "responseCode": 401
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1184,
+        -864
+      ],
+      "id": "04f7b132-27d9-4867-ae5d-9ffbc9552c18",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "groupMessages": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        80
+      ],
+      "id": "0e876a01-d61c-438e-8799-103aafa0aba7",
+      "name": "Chat Memory Manager"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        896,
+        80
+      ],
+      "id": "974f0c2e-2f91-461d-bfbd-3185bdab458d",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "action": "generate",
+        "dataPropertyName": "thread_id"
+      },
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        1408,
+        -304
+      ],
+      "id": "50e74c6e-b2c3-48b5-b485-ce67e8862d0c",
+      "name": "Crypto"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6653b41a-0d1e-4977-bd2b-736053231a6c",
+              "leftValue": "={{ $json.body.thread_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1184,
+        -384
+      ],
+      "id": "02a54500-f239-40f4-820a-1ebe0d923d17",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "threads",
+          "mode": "list",
+          "cachedResultName": "threads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "user_id": "={{ $('Informacoes').item.json.user.id }}",
+            "id": "={{ $('Informacoes').item.json.body.thread_id || $('Crypto').item.json.thread_id }}",
+            "name": "={{ $('Informacoes').item.json.body.chatInput }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "user_id",
+              "displayName": "user_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "skipOnConflict": true
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        2032,
+        -400
+      ],
+      "id": "39c30dc8-9ce9-4b13-8084-482a575cb63e",
+      "name": "Insert rows in a table",
+      "executeOnce": true,
+      "credentials": {
+        "postgres": {
+          "id": "DOyFpouYcx4UEa5R",
+          "name": "Supabase SQL Data Saturday"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Acessa o primeiro item de entrada para extrair headers e dados binários\nconst inputItem = $input.first();\nconst authHeader = inputItem.json.headers.authorization;\n\nif (!authHeader) {\n  throw new Error('Header Authorization não encontrado');\n}\n\n// Remove o prefixo \"Bearer \" para pegar só o hash\nconst tokenRecebido = authHeader.replace('Bearer ', '').trim();\n\ntry {\n  // ... Sua lógica de decodificação e validação do token ...\n  const jsonString = Buffer.from(tokenRecebido, 'base64').toString('utf-8');\n  const payload = JSON.parse(jsonString);\n  const agora = Math.floor(Date.now() / 1000);\n\n  let outputJson;\n\n  if (payload.exp < agora) {\n    outputJson = {\n      valid: false,\n      message: 'Token expirado'\n    };\n  } else {\n    outputJson = {\n      valid: true,\n      user: {\n        id: payload.sub,\n        email: payload.email,\n        name: payload.name\n      }\n    };\n  }\n\n  // --- PARTE CRUCIAL PARA BINÁRIOS ---\n  // Cria o objeto de retorno.\n  const outputItem = {\n    json: outputJson\n  };\n\n  // Se o item de entrada possuía dados binários, anexe-os ao item de saída.\n  if (inputItem.binary) {\n    outputItem.binary = inputItem.binary;\n  }\n  // ------------------------------------\n\n  return [outputItem]; // Retorna um array contendo o item modificado\n\n} catch (error) {\n  // ... Sua lógica de erro ...\n  const outputItem = {\n    json: {\n      valid: false,\n      message: 'Token inválido ou mal formatado'\n    }\n  };\n  \n  // No caso de erro, você também pode optar por propagar o binário ou não.\n  // Se quiser propagar, adicione a mesma lógica de 'if (inputItem.binary)'.\n\n  return [outputItem];\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        -368
+      ],
+      "id": "303f25d1-035a-4239-8bc8-6e11ea0f0c2a",
+      "name": "Verifica Token1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6b50c317-ce4b-475d-aef4-504c77d8153c",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        -368
+      ],
+      "id": "7fcd1000-ebe4-4eff-9517-8806008f4242",
+      "name": "token válido?"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"message\": \"Usuário não autenticado\"\n}",
+        "options": {
+          "responseCode": 401
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        976,
+        -240
+      ],
+      "id": "d0d7fd08-4b3c-462b-b73a-780f52c366d3",
+      "name": "Respond to Webhook3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0e13063a-1e68-450b-b35b-658ba3beeae4",
+              "name": "user.id",
+              "value": "={{ $json.user.id }}",
+              "type": "string"
+            },
+            {
+              "id": "1caf328e-baa6-442b-8587-a6d38b34a8ce",
+              "name": "user.email",
+              "value": "={{ $json.user.email }}",
+              "type": "string"
+            },
+            {
+              "id": "f08d74ef-0160-4318-adde-3d6ec7a3a427",
+              "name": "user.name",
+              "value": "={{ $json.user.name }}",
+              "type": "string"
+            },
+            {
+              "id": "ba23d850-cb13-4dee-914a-ddf8d0ca2396",
+              "name": "body.chatInput",
+              "value": "={{ $('Chat').item.json.body.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "188713f2-2c64-42d3-a0bb-52d86e07f373",
+              "name": "body.thread_id",
+              "value": "={{ $('Chat').item.json.body.thread_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {
+          "stripBinary": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        976,
+        -384
+      ],
+      "id": "d47192d4-da48-4047-b241-1859e02f6e0f",
+      "name": "Informacoes"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pega o header Authorization enviado pelo React\nconst authHeader = $input.first().json.headers.authorization;\n\nif (!authHeader) {\n  throw new Error('Header Authorization não encontrado');\n}\n\n// Remove o prefixo \"Bearer \" para pegar só o hash\nconst tokenRecebido = authHeader.replace('Bearer ', '').trim();\n\ntry {\n  // 1. Decodifica Base64 para String (Simulando a verificação de assinatura)\n  // No Node.js do n8n, usamos Buffer em vez de atob()\n  const jsonString = Buffer.from(tokenRecebido, 'base64').toString('utf-8');\n  \n  // 2. Transforma em Objeto JSON\n  const payload = JSON.parse(jsonString);\n\n  // 3. Verifica Expiração (Timestamp atual em segundos vs payload.exp)\n  const agora = Math.floor(Date.now() / 1000);\n  \n  if (payload.exp < agora) {\n    // Se o token venceu, retornamos valid: false\n    return {\n      json: {\n        valid: false,\n        message: 'Token expirado'\n      }\n    };\n  }\n\n  // 4. Se chegou aqui, é válido! Retornamos os dados do usuário para o front\n  return {\n    json: {\n      valid: true,\n      user: {\n        id: payload.sub,\n        email: payload.email,\n        name: payload.name\n      }\n    }\n  };\n\n} catch (error) {\n  // Se o token for lixo ou mal formatado, cai aqui\n  return {\n    json: {\n      valid: false,\n      message: 'Token inválido ou mal formatado'\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        560
+      ],
+      "id": "01a93286-892b-4d9a-842d-3aca5ec02407",
+      "name": "Verifica Token2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1168,
+        560
+      ],
+      "id": "549b5fd4-e008-4006-ab34-ac7ee378d7fe",
+      "name": "Respond to Webhook4"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "include": "specifiedFields",
+        "fieldsToInclude": "id, name, created_at",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        960,
+        560
+      ],
+      "id": "018e72cd-9ad0-4423-baed-30a139c50b98",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "threads",
+          "mode": "list",
+          "cachedResultName": "threads"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "user_id",
+              "value": "={{ $json.user.id }}"
+            }
+          ]
+        },
+        "sort": {
+          "values": [
+            {
+              "column": "created_at",
+              "direction": "DESC"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        752,
+        560
+      ],
+      "id": "4119d6ed-c5c5-42c2-bc62-34efcab84843",
+      "name": "Select rows from a table",
+      "credentials": {
+        "postgres": {
+          "id": "DOyFpouYcx4UEa5R",
+          "name": "Supabase SQL Data Saturday"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "/llmchat/threads/:thread-id",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        352,
+        80
+      ],
+      "id": "573d06ea-2317-4129-9d23-628d1f305958",
+      "name": "Obter thread",
+      "webhookId": "f3c460d7-f14f-4eb2-96da-78800130644a"
+    },
+    {
+      "parameters": {
+        "path": "/llmchat/threads",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        336,
+        560
+      ],
+      "id": "888b308a-fb4d-4e80-8a68-d21f3cf69431",
+      "name": "Obter thread's",
+      "webhookId": "ce6281eb-d613-4585-80e8-526e74cec146"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.thread_id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        1696,
+        -192
+      ],
+      "id": "99bbfec4-8798-40f0-ad8e-62f6aa9f9089",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "DOyFpouYcx4UEa5R",
+          "name": "Supabase SQL Data Saturday"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.params['thread-id'] }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        576,
+        288
+      ],
+      "id": "a9e5e12a-9a78-40ce-abcd-68088a4e9d75",
+      "name": "Postgres Chat Memory1",
+      "credentials": {
+        "postgres": {
+          "id": "DOyFpouYcx4UEa5R",
+          "name": "Supabase SQL Data Saturday"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Autenticação",
+        "height": 368,
+        "width": 1328
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        304,
+        -1088
+      ],
+      "typeVersion": 1,
+      "id": "cb921cfb-2a97-4537-b39d-ae4703fcd482",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Validação",
+        "height": 240,
+        "width": 1328,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        304,
+        -704
+      ],
+      "typeVersion": 1,
+      "id": "a0029320-a81e-4e75-84fc-f34efd197647",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Chat",
+        "height": 400,
+        "width": 2320,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        304,
+        -448
+      ],
+      "typeVersion": 1,
+      "id": "5b998991-48bf-4120-a82c-9da5da02cd5d",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "# Obter Thread",
+        "height": 432,
+        "width": 1120,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        304,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "b2a79cb1-cb0d-441e-b6ca-589cf9d33ecc",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# Obter TODAS Threads do User",
+        "height": 352,
+        "width": 1136,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        304,
+        432
+      ],
+      "typeVersion": 1,
+      "id": "c48c6a62-86d4-40c1-82be-899148277977",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {
+    "Auth": [
+      {
+        "json": {
+          "headers": {
+            "host": "automacao.tizarlabs.app",
+            "user-agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36 Edg/142.0.0.0",
+            "content-length": "50",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "pt-BR,pt;q=0.9",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "2804:14d:ae82:894b:dc3b:63d9:d4d0:3832",
+            "cf-ipcountry": "BR",
+            "cf-ray": "9a87faa438ac8aef-GIG",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "content-type": "application/json",
+            "dnt": "1",
+            "origin": "http://localhost:5173",
+            "referer": "http://localhost:5173/",
+            "sec-ch-ua": "\"Chromium\";v=\"142\", \"Microsoft Edge\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?1",
+            "sec-ch-ua-platform": "\"Android\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin",
+            "x-forwarded-for": "172.70.140.141",
+            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "afc67184ec5f",
+            "x-real-ip": "172.70.140.141"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "email": "teste@teste.com",
+            "password": "Teste123"
+          },
+          "webhookUrl": "https://webhook.tizarlabs.app/webhook/n8n/llmchat/auth",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Valida Token": [
+      {
+        "json": {
+          "headers": {
+            "host": "automacao.tizarlabs.app",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+            "content-length": "0",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "pt-BR,pt;q=0.9",
+            "authorization": "Bearer eyJzdWIiOiIkaW5wdXQuZmlyc3QoKS5qc29uLmlkIiwiZW1haWwiOiIkaW5wdXQuZmlyc3QoKS5qc29uLmVtYWlsIiwiZXhwIjoxNzY0ODI4NDk5LjM5OX0=",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "2804:14d:ae82:894b:dc3b:63d9:d4d0:3832",
+            "cf-ipcountry": "BR",
+            "cf-ray": "9a887134de1fb1cc-GIG",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "content-type": "application/json",
+            "dnt": "1",
+            "origin": "http://localhost:5173",
+            "priority": "u=1, i",
+            "referer": "http://localhost:5173/",
+            "sec-ch-ua": "\"Chromium\";v=\"142\", \"Microsoft Edge\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "172.70.140.140",
+            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "afc67184ec5f",
+            "x-real-ip": "172.70.140.140"
+          },
+          "params": {},
+          "query": {},
+          "body": {},
+          "webhookUrl": "https://webhook.tizarlabs.app/webhook/n8n/llmchat/auth/validate-token",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Chat": [
+      {
+        "json": {
+          "headers": {
+            "host": "automacao.tizarlabs.app",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+            "content-length": "324",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "pt-BR,pt;q=0.9",
+            "authorization": "Bearer eyJzdWIiOiJiYWRlNDgzMS1iMzE2LTQyNGItODdmNC0xY2YzMGJkMGZlMTYiLCJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsIm5hbWUiOiJGdWxhbm8gZGUgQ2ljbGFubyIsImV4cCI6MTc2NTAwMTU2Ny4wMDd9",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "177.174.3.149",
+            "cf-ipcountry": "BR",
+            "cf-ray": "9a945f106abfe152-GIG",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "content-type": "multipart/form-data; boundary=----WebKitFormBoundaryAIkxxReVad8BdakB",
+            "dnt": "1",
+            "origin": "http://localhost:5174",
+            "priority": "u=1, i",
+            "referer": "http://localhost:5174/",
+            "sec-ch-ua": "\"Chromium\";v=\"142\", \"Microsoft Edge\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "172.70.140.140",
+            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "afc67184ec5f",
+            "x-real-ip": "172.70.140.140"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "chatInput": "agora mostre 4 exemplos de acordo com o que mostrtou",
+            "thread_id": "29039232-82a7-4c1f-8010-fe7a1f4d098d"
+          },
+          "webhookUrl": "https://webhook.tizarlabs.app/webhook/llmchat/chat",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Obter thread": [
+      {
+        "json": {
+          "headers": {
+            "host": "automacao.tizarlabs.app",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "pt-BR,pt;q=0.9",
+            "authorization": "Bearer eyJzdWIiOiJiYWRlNDgzMS1iMzE2LTQyNGItODdmNC0xY2YzMGJkMGZlMTYiLCJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsIm5hbWUiOiJGdWxhbm8gZGUgQ2ljbGFubyIsImV4cCI6MTc2NDg4NzM4Ni4zNzl9",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "2804:14d:ae82:894b:3c3a:d186:13dc:b43a",
+            "cf-ipcountry": "BR",
+            "cf-ray": "9a8e310628907a6f-GIG",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "dnt": "1",
+            "origin": "http://localhost:5173",
+            "priority": "u=1, i",
+            "referer": "http://localhost:5173/",
+            "sec-ch-ua": "\"Chromium\";v=\"142\", \"Microsoft Edge\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "172.70.140.140",
+            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "afc67184ec5f",
+            "x-real-ip": "172.70.140.140"
+          },
+          "params": {
+            "thread-id": "f6db923c-49e5-456b-b05e-8fd28cafb382"
+          },
+          "query": {},
+          "body": {},
+          "webhookUrl": "https://webhook.tizarlabs.app/webhook/f3c460d7-f14f-4eb2-96da-78800130644a/llmchat/threads/:thread-id",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Obter thread's": [
+      {
+        "json": {
+          "headers": {
+            "host": "automacao.tizarlabs.app",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "pt-BR,pt;q=0.9",
+            "authorization": "Bearer eyJzdWIiOiJiYWRlNDgzMS1iMzE2LTQyNGItODdmNC0xY2YzMGJkMGZlMTYiLCJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsIm5hbWUiOiJGdWxhbm8gZGUgQ2ljbGFubyIsImV4cCI6MTc2NDk0ODA4OC41NTF9",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "177.174.3.149",
+            "cf-ipcountry": "BR",
+            "cf-ray": "9a93d8d1cb0834bf-GIG",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "dnt": "1",
+            "if-none-match": "W/\"366-lmJvn4e1ycSIX8xWMNiKAAKEtc0\"",
+            "origin": "http://localhost:5174",
+            "priority": "u=1, i",
+            "referer": "http://localhost:5174/",
+            "sec-ch-ua": "\"Chromium\";v=\"142\", \"Microsoft Edge\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "172.64.222.136",
+            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "afc67184ec5f",
+            "x-real-ip": "172.64.222.136"
+          },
+          "params": {},
+          "query": {},
+          "body": {},
+          "webhookUrl": "https://webhook.tizarlabs.app/webhook/llmchat/threads",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat": {
+      "main": [
+        [
+          {
+            "node": "Verifica Token1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auth": {
+      "main": [
+        [
+          {
+            "node": "password_hash",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a row": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "password_hash": {
+      "main": [
+        [
+          {
+            "node": "Get a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Codifica Token": {
+      "main": [
+        [
+          {
+            "node": "Respond to Auth",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valida Token": {
+      "main": [
+        [
+          {
+            "node": "Verifica Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica Token": {
+      "main": [
+        [
+          {
+            "node": "Retorna Validacao",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Codifica Token",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory Manager": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crypto": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Crypto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica Token1": {
+      "main": [
+        [
+          {
+            "node": "token válido?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "token válido?": {
+      "main": [
+        [
+          {
+            "node": "Informacoes",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Informacoes": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica Token2": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obter thread": {
+      "main": [
+        [
+          {
+            "node": "Chat Memory Manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obter thread's": {
+      "main": [
+        [
+          {
+            "node": "Verifica Token2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Chat Memory Manager",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "bab1fc22-395b-4d91-9ca3-96351189d607",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "aaf92c1bd5e5e9a929b62a1a3d23aebab44f27e29328f7b0338a72d51faeecfe"
+  },
+  "id": "Lvhsjvs1lwzy8GNg",
+  "tags": []
+}
