@@ -1,7 +1,6 @@
 # API Endpoints - n8n LLM Chat
 
-Base URL: `https://http://localhost:5678
-/webhook`
+Base URL: `https://http://localhost:5678/webhook`
 
 ## Autenticação
 
