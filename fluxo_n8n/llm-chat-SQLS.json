@@ -818,7 +818,8 @@
       {
         "json": {
           "headers": {
-            "host": "automacao.tizarlabs.app",
+            "host": "http://localhost:5678
+",
             "user-agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36 Edg/142.0.0.0",
             "content-length": "50",
             "accept": "*/*",
@@ -840,7 +841,8 @@
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "same-origin",
             "x-forwarded-for": "172.70.140.141",
-            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-host": "http://localhost:5678
+",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "afc67184ec5f",
@@ -852,7 +854,8 @@
             "email": "teste@teste.com",
             "password": "Teste123"
           },
-          "webhookUrl": "https://webhook.tizarlabs.app/webhook/n8n/llmchat/auth",
+          "webhookUrl": "https://localhost:5678
+/webhook/n8n/llmchat/auth",
           "executionMode": "production"
         }
       }
@@ -861,7 +864,8 @@
       {
         "json": {
           "headers": {
-            "host": "automacao.tizarlabs.app",
+            "host": "http://localhost:5678
+",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
             "content-length": "0",
             "accept": "*/*",
@@ -885,7 +889,8 @@
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "cross-site",
             "x-forwarded-for": "172.70.140.140",
-            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-host": "http://localhost:5678
+",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "afc67184ec5f",
@@ -894,7 +899,8 @@
           "params": {},
           "query": {},
           "body": {},
-          "webhookUrl": "https://webhook.tizarlabs.app/webhook/n8n/llmchat/auth/validate-token",
+          "webhookUrl": "https://localhost:5678
+/webhook/n8n/llmchat/auth/validate-token",
           "executionMode": "production"
         }
       }
@@ -903,7 +909,8 @@
       {
         "json": {
           "headers": {
-            "host": "automacao.tizarlabs.app",
+            "host": "http://localhost:5678
+",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
             "content-length": "324",
             "accept": "*/*",
@@ -927,7 +934,8 @@
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "cross-site",
             "x-forwarded-for": "172.70.140.140",
-            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-host": "http://localhost:5678
+",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "afc67184ec5f",
@@ -939,7 +947,8 @@
             "chatInput": "agora mostre 4 exemplos de acordo com o que mostrtou",
             "thread_id": "29039232-82a7-4c1f-8010-fe7a1f4d098d"
           },
-          "webhookUrl": "https://webhook.tizarlabs.app/webhook/llmchat/chat",
+          "webhookUrl": "https://localhost:5678
+/webhook/llmchat/chat",
           "executionMode": "production"
         }
       }
@@ -948,7 +957,8 @@
       {
         "json": {
           "headers": {
-            "host": "automacao.tizarlabs.app",
+            "host": "http://localhost:5678
+",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
             "accept": "*/*",
             "accept-encoding": "gzip, br",
@@ -970,7 +980,8 @@
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "cross-site",
             "x-forwarded-for": "172.70.140.140",
-            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-host": "http://localhost:5678
+",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "afc67184ec5f",
@@ -981,7 +992,8 @@
           },
           "query": {},
           "body": {},
-          "webhookUrl": "https://webhook.tizarlabs.app/webhook/f3c460d7-f14f-4eb2-96da-78800130644a/llmchat/threads/:thread-id",
+          "webhookUrl": "https://localhost:5678
+/webhook/f3c460d7-f14f-4eb2-96da-78800130644a/llmchat/threads/:thread-id",
           "executionMode": "production"
         }
       }
@@ -990,7 +1002,8 @@
       {
         "json": {
           "headers": {
-            "host": "automacao.tizarlabs.app",
+            "host": "http://localhost:5678
+",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
             "accept": "*/*",
             "accept-encoding": "gzip, br",
@@ -1013,7 +1026,8 @@
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "cross-site",
             "x-forwarded-for": "172.64.222.136",
-            "x-forwarded-host": "automacao.tizarlabs.app",
+            "x-forwarded-host": "http://localhost:5678
+",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "afc67184ec5f",
@@ -1022,7 +1036,8 @@
           "params": {},
           "query": {},
           "body": {},
-          "webhookUrl": "https://webhook.tizarlabs.app/webhook/llmchat/threads",
+          "webhookUrl": "https://localhost:5678
+/webhook/llmchat/threads",
           "executionMode": "production"
         }
       }
