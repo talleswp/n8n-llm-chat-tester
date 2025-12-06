@@ -93,10 +93,12 @@ Authorization: Bearer {token}
 ```
 
 **Request (FormData):**
-```
-chatInput: string (obrigatório)
-thread_id: string (opcional - null para nova conversa)
-file: File (opcional - apenas imagens)
+```json
+{
+    "chatInput": "string" (obrigatório)
+    "thread_id": "string" (opcional - null para nova conversa)
+    "file": "File" (opcional - apenas imagens)
+}
 ```
 
 **Response (200):**
