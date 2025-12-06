@@ -1,4 +1,4 @@
-// Centraliza todas as chamadas HTTP para o backend
+// Centraliza todas as chamadas HTTP para o backend  -  LOCAL http://localhost:5678
 
 const API_BASE_URL = 'https://automacao.tizarlabs.app/webhook';
 
