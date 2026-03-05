@@ -60,12 +60,18 @@ const Register = ({ onBackToLogin }) => {
 
   if (success) {
     return (
-      <div className="register-container">
-        <div className="register-card">
-          <div className="success-message">
-            <div className="success-icon">✓</div>
-            <h2>Cadastro realizado com sucesso!</h2>
-            <p>Redirecionando para o login...</p>
+      <div className="d-flex align-items-center justify-content-center min-vh-100 bg-body-secondary py-4">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-xl-5 col-lg-6 col-md-8 col-12">
+              <div className="card register-card overflow-hidden">
+                <div className="p-4 p-md-5 text-center">
+                  <div className="success-icon">✓</div>
+                  <h2 className="h4 mb-2">Cadastro realizado com sucesso!</h2>
+                  <p className="text-body-secondary">Redirecionando para o login...</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -73,90 +79,92 @@ const Register = ({ onBackToLogin }) => {
   }
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <div className="register-header">
-          <h1>Criar Conta</h1>
-          <p>Preencha os dados para se cadastrar</p>
-        </div>
+    <div className="d-flex align-items-center justify-content-center min-vh-100 bg-body-secondary py-4">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-xl-5 col-lg-6 col-md-8 col-12">
+            <div className="card register-card overflow-hidden">
+              <div className="p-4 p-md-5">
+                    <h1 className="h3 text-center mb-1">Criar Conta</h1>
+                    <p className="text-center text-body-secondary">Preencha os dados para se cadastrar</p>
 
-        <form onSubmit={handleSubmit} className="register-form">
-          <div className="form-group">
-            <label htmlFor="name">Nome completo</label>
-            <input
-              id="name"
-              type="text"
-              className="form-control"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Seu nome completo"
-              disabled={isLoading}
-              autoFocus
-            />
-          </div>
+                    <form onSubmit={handleSubmit} className="mt-4">
+                      <div className="form-group">
+                        <label htmlFor="name">Nome completo</label>
+                        <input
+                          id="name"
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Seu nome completo"
+                          disabled={isLoading}
+                          autoFocus
+                        />
+                      </div>
 
-          <EmailInput
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="seu@email.com"
-            disabled={isLoading}
-            autoComplete="email"
-          />
+                      <EmailInput
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="m@example.com"
+                        disabled={isLoading}
+                        autoComplete="email"
+                      />
 
-          <PasswordInput
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Senha (mínimo 6 caracteres)"
-            disabled={isLoading}
-            autoComplete="new-password"
-          />
+                      <PasswordInput
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Mínimo 6 caracteres"
+                        disabled={isLoading}
+                        autoComplete="new-password"
+                      />
 
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirmar senha</label>
-            <input
-              id="confirmPassword"
-              type="password"
-              className="form-control"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Digite a senha novamente"
-              disabled={isLoading}
-              autoComplete="new-password"
-            />
-          </div>
+                      <div className="form-group">
+                        <label htmlFor="confirmPassword">Confirmar senha</label>
+                        <input
+                          id="confirmPassword"
+                          type="password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          placeholder="Digite a senha novamente"
+                          disabled={isLoading}
+                          autoComplete="new-password"
+                        />
+                      </div>
 
-          {error && (
-            <div className="alert alert-danger" role="alert">
-              {error}
+                      {/* Exibir Erros */}
+                      {error && (
+                        <div className="alert alert-danger py-2 px-3 small text-center mt-3">
+                          {error}
+                        </div>
+                      )}
+
+                      {/* Botão Submit */}
+                      <button
+                        type="submit"
+                        className="btn btn-sm btn-primary w-100 mt-3"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? 'Criando conta...' : 'Criar conta'}
+                      </button>
+
+                      <div className="text-center mt-4 small">
+                        Já tem uma conta?{' '}
+                        <a
+                          href="#"
+                          className="text-decoration-underline"
+                          onClick={(e) => { e.preventDefault(); onBackToLogin(); }}
+                        >
+                          Fazer login
+                        </a>
+                      </div>
+                    </form>
+              </div>
             </div>
-          )}
 
-          <button 
-            type="submit" 
-            className="btn btn-primary w-100"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                Criando conta...
-              </>
-            ) : (
-              'Criar conta'
-            )}
-          </button>
-        </form>
-
-        <div className="register-footer">
-          <p>Já tem uma conta?</p>
-          <button 
-            type="button"
-            className="btn btn-link"
-            onClick={onBackToLogin}
-            disabled={isLoading}
-          >
-            Fazer login
-          </button>
+            <div className="text-center text-muted small mt-4">
+              A IA pode cometer erros. Verifique informações importantes.
+            </div>
+          </div>
         </div>
       </div>
     </div>
