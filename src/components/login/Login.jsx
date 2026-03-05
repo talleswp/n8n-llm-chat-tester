@@ -81,13 +81,13 @@ const Login = ({ onRegisterClick }) => {
 
                       <div className="text-center mt-4 mb-3 text-muted small">Ou continue com</div>
                       <div className="d-flex gap-2">
-                        <button type="button" className="btn btn-sm btn-outline-secondary flex-grow-1">
+                        <button type="button" className="btn btn-sm btn-neutral flex-grow-1">
                           <i className="bi bi-apple"></i>
                         </button>
-                        <button type="button" className="btn btn-sm btn-outline-secondary flex-grow-1">
+                        <button type="button" className="btn btn-sm btn-neutral flex-grow-1">
                           <i className="bi bi-github"></i>
                         </button>
-                        <button type="button" className="btn btn-sm btn-outline-secondary flex-grow-1">
+                        <button type="button" className="btn btn-sm btn-neutral flex-grow-1">
                           <i className="bi bi-google"></i>
                         </button>
                       </div>

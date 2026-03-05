@@ -4,20 +4,20 @@ import './ThreadItem.css';
 
 const ThreadItem = ({ thread, isActive, onClick }) => {
   return (
-    <div 
-      className={`thread-item ${isActive ? 'active' : ''}`}
-      onClick={onClick}
-    >
-      <div className="thread-icon"><i class="bi bi-chat-left-text"></i></div>
-      <div className="thread-content">
-        <div className="thread-name">{thread.name}</div>
+    <li className="nav-item">
+      <a
+        className={`nav-link px-2 rounded-1 bg-accent-hover d-flex align-items-center ${isActive ? 'active' : ''}`}
+        href="#"
+        onClick={(e) => { e.preventDefault(); onClick(); }}
+        title={thread.name}
+        style={{ fontSize: '13px', whiteSpace: 'nowrap', overflow: 'hidden' }}
+      >
+        <span className="text-truncate flex-fill" style={{ minWidth: 0 }}>{thread.name}</span>
         {thread.updatedAt && (
-          <div className="thread-date">
-            {formatRelativeDate(thread.updatedAt)}
-          </div>
+          <span className="text-body-secondary flex-shrink-0 ms-auto" style={{ fontSize: '10px' }}>{formatRelativeDate(thread.updatedAt)}</span>
         )}
-      </div>
-    </div>
+      </a>
+    </li>
   );
 };
 

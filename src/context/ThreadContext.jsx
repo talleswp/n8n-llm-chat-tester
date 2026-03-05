@@ -7,6 +7,7 @@ const ThreadProvider = ({ children }) => {
   const { token } = useAuth();
   const [threads, setThreads] = useState([]);
   const [activeThreadId, setActiveThreadId] = useState(null);
+  const [newChatTrigger, setNewChatTrigger] = useState(0);
   const [isLoadingThreads, setIsLoadingThreads] = useState(false);
   const [error, setError] = useState(null);
 
@@ -72,6 +73,7 @@ const ThreadProvider = ({ children }) => {
    */
   const createNewThread = () => {
     setActiveThreadId(null);
+    setNewChatTrigger(prev => prev + 1);
   };
 
   /**
@@ -81,8 +83,8 @@ const ThreadProvider = ({ children }) => {
     setThreads(prev => {
       const exists = prev.find(t => t.thread_id === thread.thread_id);
       if (exists) {
-        // Atualiza existente
-        return prev.map(t => t.thread_id === thread.thread_id ? thread : t);
+        // Merge parcial — preserva campos existentes e atualiza os fornecidos
+        return prev.map(t => t.thread_id === thread.thread_id ? { ...t, ...thread } : t);
       } else {
         // Adiciona nova no início
         return [thread, ...prev];
@@ -101,6 +103,7 @@ const ThreadProvider = ({ children }) => {
   const value = {
     threads,
     activeThreadId,
+    newChatTrigger,
     isLoadingThreads,
     error,
     loadThreads,

@@ -1,52 +1,6 @@
-/* Thread Item */
-.thread-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  margin-bottom: 4px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid transparent;
-}
-
-.thread-item:hover {
-  background: #2a2b2e;
-}
-
-.thread-item.active {
-  background: #2a2b2e;
-  border-color: #8ab4f8;
-}
-
-.thread-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-.thread-content {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.thread-name {
-  font-size: 14px;
-  color: #E3E3E3;
+/* Thread Active State */
+.nav-link.active {
+  background-color: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
   font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.thread-date {
-  font-size: 11px;
-  color: #9aa0a6;
-}
-
-.thread-item.active .thread-name {
-  color: #8ab4f8;
 }

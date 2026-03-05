@@ -9,7 +9,7 @@ import { useThreads } from './useThreads';
  */
 export const useChat = () => {
   const { token } = useAuth();
-  const { activeThreadId, upsertThread, selectThread, loadThreadHistory } = useThreads();
+  const { activeThreadId, upsertThread, selectThread, loadThreadHistory, loadThreads, newChatTrigger } = useThreads();
   
   // Estados
   const [messages, setMessages] = useState([]);
@@ -161,7 +161,15 @@ export const useChat = () => {
           updatedAt: new Date().toISOString(),
         };
         upsertThread(newThread);
-        selectThread(data.thread_id); // Seleciona a nova thread como ativa
+        selectThread(data.thread_id);
+        // Recarrega threads do backend para sincronizar
+        loadThreads();
+      } else if (activeThreadId) {
+        // Atualiza o updatedAt da thread existente para manter "recente"
+        upsertThread({
+          thread_id: activeThreadId,
+          updatedAt: new Date().toISOString(),
+        });
       }
 
       setMessages(prev => [...prev, { role: 'ai', content: aiContent }]);
@@ -178,7 +186,7 @@ export const useChat = () => {
     }
   };
 
-  // Carrega histórico quando thread ativa muda
+  // Carrega histórico quando thread ativa muda ou nova conversa é criada
   useEffect(() => {
     if (activeThreadId) {
       loadHistory(activeThreadId);
@@ -186,7 +194,7 @@ export const useChat = () => {
       clearMessages();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeThreadId]);
+  }, [activeThreadId, newChatTrigger]);
 
   return {
     // Estados
