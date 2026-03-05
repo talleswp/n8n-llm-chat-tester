@@ -40,7 +40,7 @@ npm install
 Antes de usar, configure a URL do webhook do n8n no arquivo `src/App.jsx`:
 
 ```javascript
-const WEBHOOK_URL = 'https://http://localhost:5678/webhook/llm-chat';
+const WEBHOOK_URL = 'https://webhook.tizarlabs.app/webhook';
 ```
 
 Substitua pela URL do seu webhook n8n que processa as requisições de chat.

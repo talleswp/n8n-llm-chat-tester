@@ -33,61 +33,89 @@ const Login = ({ onRegisterClick }) => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <div className="login-header">
-          <h1>n8n LLM Chat</h1>
-          <p>Entre para continuar</p>
-        </div>
+    <div className="d-flex align-items-center justify-content-center min-vh-100 bg-body-secondary py-4">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-xl-7 col-lg-9 col-12">
+            <div className="card login-card overflow-hidden">
+              <div className="row g-0">
+                {/* Formulário */}
+                <div className="col-md-6">
+                  <div className="p-4 p-md-5">
+                    <h1 className="h3 text-center mb-1">Log in</h1>
+                    <p className="text-center text-body-secondary">Entre na sua conta</p>
 
-        <form onSubmit={handleSubmit} className="login-form">
-          <EmailInput
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="seu@email.com"
-            disabled={isLoading}
-            autoComplete="email"
-            autoFocus
-          />
+                    <form onSubmit={handleSubmit} className="mt-4">
+                      <EmailInput
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="m@example.com"
+                        disabled={isLoading}
+                        autoComplete="email"
+                        autoFocus
+                      />
 
-          <PasswordInput
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
-            disabled={isLoading}
-            autoComplete="current-password"
-          />
+                      <PasswordInput
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="••••••••"
+                        disabled={isLoading}
+                        autoComplete="current-password"
+                      />
 
-          {/* Exibir Erros */}
-          {(localError || error) && (
-            <div className="error-message">
-              {localError || error}
+                      {/* Exibir Erros */}
+                      {(localError || error) && (
+                        <div className="alert alert-danger py-2 px-3 small text-center mt-3">
+                          {localError || error}
+                        </div>
+                      )}
+
+                      {/* Botão Submit */}
+                      <button
+                        type="submit"
+                        className="btn btn-sm btn-primary w-100 mt-3"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? 'Entrando...' : 'Entrar'}
+                      </button>
+
+                      <div className="text-center mt-4 mb-3 text-muted small">Ou continue com</div>
+                      <div className="d-flex gap-2">
+                        <button type="button" className="btn btn-sm btn-outline-secondary flex-grow-1">
+                          <i className="bi bi-apple"></i>
+                        </button>
+                        <button type="button" className="btn btn-sm btn-outline-secondary flex-grow-1">
+                          <i className="bi bi-github"></i>
+                        </button>
+                        <button type="button" className="btn btn-sm btn-outline-secondary flex-grow-1">
+                          <i className="bi bi-google"></i>
+                        </button>
+                      </div>
+
+                      <div className="text-center mt-4 small">
+                        Não tem uma conta?{' '}
+                        <a
+                          href="#"
+                          className="text-decoration-underline"
+                          onClick={(e) => { e.preventDefault(); onRegisterClick(); }}
+                        >
+                          Criar conta
+                        </a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                {/* Imagem lateral */}
+                <div className="col-md-6 d-none d-md-block login-image-col border-start">
+                </div>
+              </div>
             </div>
-          )}
 
-          {/* Botão Submit */}
-          <button
-            type="submit"
-            className="login-button"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Entrando...' : 'Entrar'}
-          </button>
-        </form>
-
-        <div className="login-footer">
-          <p>Não tem uma conta?</p>
-          <button 
-            type="button"
-            className="register-link"
-            onClick={onRegisterClick}
-          >
-            Criar conta gratuita
-          </button>
-        </div>
-
-        <div className="login-disclaimer">
-          <p>A IA pode cometer erros. Verifique informações importantes.</p>
+            <div className="text-center text-muted small mt-4">
+              A IA pode cometer erros. Verifique informações importantes.
+            </div>
+          </div>
         </div>
       </div>
     </div>
