@@ -49,15 +49,15 @@ const UserMenu = ({ user, onLogout }) => {
             <span className="d-block text-body-secondary" style={{ fontSize: '11px' }}>Conectado como:</span>
             <span className="d-block fw-semibold" style={{ fontSize: '13px' }}>{user?.name || 'Usuário'}</span>
           </div>
-          <div className="dropdown-divider"></div>
-          <a
+          {/* <div className="dropdown-divider"></div> */}
+          {/* <a
             className="dropdown-item d-flex align-items-center gap-2 px-3"
             href="#"
             onClick={(e) => { e.preventDefault(); setIsOpen(false); }}
           >
             <i className="bi bi-gear"></i>
             <span>Configurações</span>
-          </a>
+          </a> */}
           <div className="dropdown-divider"></div>
           <a
             className="dropdown-item d-flex align-items-center gap-2 px-3 text-danger"

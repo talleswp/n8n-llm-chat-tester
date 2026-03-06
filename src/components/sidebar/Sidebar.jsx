@@ -19,7 +19,7 @@ const Sidebar = ({ isOpen, onToggle, user, onLogout }) => {
 
   return (
     <div className={`sidebar-container ${isOpen ? 'open' : 'closed'}`}>
-      <nav className="sidebar d-flex flex-column flex-shrink-0 position-relative h-100 offcanvas-lg">
+      <nav className="sidebar d-flex flex-column flex-shrink-0 position-relative h-100">
 
         {/* Brand / Workspace */}
         <div className="px-4 py-2">
