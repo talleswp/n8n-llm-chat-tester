@@ -1,6 +1,6 @@
 // Centraliza todas as chamadas HTTP para o backend  -  LOCAL http://localhost:5678
 
-const API_BASE_URL = 'https://webhook.tizarlabs.app/webhook';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5678/webhook-test/';
 
 /**
  * Serviço de autenticação
