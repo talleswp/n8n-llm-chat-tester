@@ -1,5 +1,29 @@
 /* Estilos para a página de Login */
 
+/* Efeito prata animado no título */
+.nspace-title {
+  background: linear-gradient(90deg, #b0b0b0 0%, #e8e8e8 25%, #ffffff 50%, #e8e8e8 75%, #b0b0b0 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: silverShine 3s linear infinite;
+}
+
+.nspace-title .bi {
+  background: linear-gradient(90deg, #b0b0b0 0%, #e8e8e8 25%, #ffffff 50%, #e8e8e8 75%, #b0b0b0 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: silverShine 3s linear infinite;
+}
+
+@keyframes silverShine {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
 /* Background gradiente animado */
 .login-page {
   background: linear-gradient(135deg, #0a0a1a 0%, #1a0533 30%, #2d1b69 55%, #7b2ff7 80%, #c084fc 100%);
