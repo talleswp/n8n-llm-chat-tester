@@ -3,6 +3,7 @@ import { authService } from '../../services/api.service';
 import EmailInput from '../common/EmailInput';
 import PasswordInput from '../common/PasswordInput';
 import './Register.css';
+import '../login/Login.css';
 
 const Register = ({ onBackToLogin }) => {
   const [name, setName] = useState('');
@@ -60,15 +61,27 @@ const Register = ({ onBackToLogin }) => {
 
   if (success) {
     return (
-      <div className="d-flex align-items-center justify-content-center min-vh-100 bg-body-secondary py-4">
-        <div className="container">
+      <div className="login-page d-flex align-items-center justify-content-center min-vh-100 py-4">
+        {/* Efeitos decorativos */}
+        <div className="login-effects" aria-hidden="true">
+          <div className="effect-circle circle-1"></div>
+          <div className="effect-circle circle-2"></div>
+          <div className="effect-circle circle-3"></div>
+          <div className="effect-circle circle-4"></div>
+          <div className="effect-line line-1"></div>
+          <div className="effect-line line-2"></div>
+          <div className="effect-line line-3"></div>
+          <div className="effect-line line-4"></div>
+        </div>
+
+        <div className="container position-relative" style={{ zIndex: 1 }}>
           <div className="row justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 col-12">
-              <div className="card register-card overflow-hidden">
+              <div className="card login-card overflow-hidden border-0">
                 <div className="p-10 p-md-10 text-center">
                   <div className="success-icon">✓</div>
-                  <h2 className="h4 mb-2">Cadastro realizado com sucesso!</h2>
-                  <p className="text-body-secondary">Redirecionando para o login...</p>
+                  <h2 className="h4 mb-2" style={{ color: '#fff' }}>Cadastro realizado com sucesso!</h2>
+                  <p style={{ color: 'rgba(255,255,255,0.6)' }}>Redirecionando para o login...</p>
                 </div>
               </div>
             </div>
@@ -79,11 +92,23 @@ const Register = ({ onBackToLogin }) => {
   }
 
   return (
-    <div className="d-flex align-items-center justify-content-center min-vh-100 bg-body-secondary py-4">
-      <div className="container">
+    <div className="login-page d-flex align-items-center justify-content-center min-vh-100 py-4">
+      {/* Efeitos decorativos */}
+      <div className="login-effects" aria-hidden="true">
+        <div className="effect-circle circle-1"></div>
+        <div className="effect-circle circle-2"></div>
+        <div className="effect-circle circle-3"></div>
+        <div className="effect-circle circle-4"></div>
+        <div className="effect-line line-1"></div>
+        <div className="effect-line line-2"></div>
+        <div className="effect-line line-3"></div>
+        <div className="effect-line line-4"></div>
+      </div>
+
+      <div className="container position-relative" style={{ zIndex: 1 }}>
         <div className="row justify-content-center">
           <div className="col-xl-5 col-lg-6 col-md-8 col-12">
-            <div className="card register-card overflow-hidden">
+            <div className="card login-card overflow-hidden border-0">
               <div className="p-10 p-md-10">
                     <h1 className="h3 text-center mb-1">Criar Conta</h1>
                     <p className="text-center text-body-secondary">Preencha os dados para se cadastrar</p>
@@ -147,7 +172,7 @@ const Register = ({ onBackToLogin }) => {
                         {isLoading ? 'Criando conta...' : 'Criar conta'}
                       </button>
 
-                      <div className="text-center mt-4 small">
+                      <div className="text-center mt-4 small text-white">
                         Já tem uma conta?{' '}
                         <a
                           href="#"
@@ -161,7 +186,7 @@ const Register = ({ onBackToLogin }) => {
               </div>
             </div>
 
-            <div className="text-center text-muted small mt-4">
+            <div className="text-center small mt-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
               A IA pode cometer erros. Verifique informações importantes.
             </div>
           </div>
