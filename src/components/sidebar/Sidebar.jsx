@@ -42,7 +42,7 @@ const Sidebar = ({ isOpen, onToggle, user, onLogout }) => {
                 onClick={(e) => { e.preventDefault(); handleNewChat(); }}
                 style={{ fontSize: '14px' }}
               >
-                <i className="bi bi-chat-square-dots"></i>
+                <i className="bi bi-textarea"></i>
                 <span>Nova Conversa</span>
               </a>
             </li>
