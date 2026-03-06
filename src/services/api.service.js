@@ -2,7 +2,7 @@
 // Em dev, as requisições passam pelo proxy do Vite (vite.config.js) para evitar CORS
 // Proxy: /api/* -> https://webhook.tizarlabs.app/webhook/*
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5678/webhook-test/';
+const API_BASE_URL = '/api';
 
 /**
  * Serviço de autenticação
