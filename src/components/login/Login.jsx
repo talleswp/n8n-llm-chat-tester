@@ -91,7 +91,7 @@ const Login = ({ onRegisterClick }) => {
                         {isLoading ? 'Entrando...' : 'Entrar'}
                       </button>
 
-                      <div className="text-center mt-4 mb-3 text-muted small">Ou continue com</div>
+                      <div className="text-center mt-4 mb-3 text-white small">Ou continue com</div>
                       <div className="d-flex gap-2">
                         <button type="button" className="btn btn-sm btn-neutral flex-grow-1">
                           <i className="bi bi-apple"></i>
@@ -104,7 +104,7 @@ const Login = ({ onRegisterClick }) => {
                         </button>
                       </div>
 
-                      <div className="text-center mt-4 small">
+                      <div className="text-center mt-4 small text-white">
                         Não tem uma conta?{' '}
                         <a
                           href="#"
