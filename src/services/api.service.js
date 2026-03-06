@@ -1,8 +1,8 @@
 // Centraliza todas as chamadas HTTP para o backend
 // Em dev, as requisições passam pelo proxy do Vite (vite.config.js) para evitar CORS
-// Proxy: /api/* -> https://webhook.tizarlabs.app/webhook/*
+// Em prod, VITE_API_BASE_URL aponta direto para a URL do webhook (definida no build via GitHub Actions)
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 /**
  * Serviço de autenticação
