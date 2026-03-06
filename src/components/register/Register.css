@@ -1,83 +1,11 @@
 /* Estilos para a página de Register */
-
-.register-card {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  border: none;
-  border-radius: 12px;
-}
-
-/* Form group overrides para EmailInput / PasswordInput */
-.register-card .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-
-.register-card .form-group label {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.register-card .form-group input {
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 1px solid #dee2e6;
-  border-radius: 6px;
-  background: #fff;
-  color: #212529;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-sizing: border-box;
-}
-
-.register-card .form-group input:focus {
-  outline: none;
-  border-color: #86b7fe;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
-
-.register-card .form-group input:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.register-card .form-group input::placeholder {
-  color: #adb5bd;
-}
-
-/* Password toggle */
-.register-card .password-input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.register-card .password-input-wrapper input {
-  padding-right: 42px;
-}
-
-.register-card .toggle-password {
-  position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 4px;
-  color: #6c757d;
-  transition: color 0.2s;
-}
-
-.register-card .toggle-password:hover {
-  color: #212529;
-}
+/* Reutiliza .login-page, .login-card, .login-effects do Login.css */
 
 /* Success Icon */
 .success-icon {
   width: 80px;
   height: 80px;
-  background: #198754;
+  background: linear-gradient(135deg, #7b2ff7, #9b59ff);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -94,12 +22,5 @@
   }
   to {
     transform: scale(1);
-  }
-}
-
-/* Responsivo */
-@media (max-width: 767.98px) {
-  .register-card .p-4 {
-    padding: 24px !important;
   }
 }
