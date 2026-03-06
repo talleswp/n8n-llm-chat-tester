@@ -33,15 +33,27 @@ const Login = ({ onRegisterClick }) => {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center min-vh-100 bg-body-secondary py-4">
-      <div className="container">
+    <div className="login-page d-flex align-items-center justify-content-center min-vh-100 py-4">
+      {/* Efeitos decorativos */}
+      <div className="login-effects" aria-hidden="true">
+        <div className="effect-circle circle-1"></div>
+        <div className="effect-circle circle-2"></div>
+        <div className="effect-circle circle-3"></div>
+        <div className="effect-circle circle-4"></div>
+        <div className="effect-line line-1"></div>
+        <div className="effect-line line-2"></div>
+        <div className="effect-line line-3"></div>
+        <div className="effect-line line-4"></div>
+      </div>
+
+      <div className="container position-relative" style={{ zIndex: 1 }}>
         <div className="row justify-content-center">
           <div className="col-xl-7 col-lg-9 col-12">
-            <div className="card login-card overflow-hidden">
+            <div className="card login-card overflow-hidden border-0">
               <div className="row g-0">
                 {/* Formulário */}
                 <div className="col-md-6">
-                  <div className="p-4 p-md-5">
+                  <div className="p-10 p-md-10">
                     <h1 className="h3 text-center mb-1">Log in</h1>
                     <p className="text-center text-body-secondary">Entre na sua conta</p>
 
@@ -112,7 +124,7 @@ const Login = ({ onRegisterClick }) => {
               </div>
             </div>
 
-            <div className="text-center text-muted small mt-4">
+            <div className="text-center small mt-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
               A IA pode cometer erros. Verifique informações importantes.
             </div>
           </div>

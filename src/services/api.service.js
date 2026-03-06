@@ -1,6 +1,8 @@
-// Centraliza todas as chamadas HTTP para o backend  -  LOCAL http://localhost:5678
+// Centraliza todas as chamadas HTTP para o backend
+// Em dev, as requisições passam pelo proxy do Vite (vite.config.js) para evitar CORS
+// Proxy: /api/* -> https://webhook.tizarlabs.app/webhook/*
 
-const API_BASE_URL = 'https://webhook.tizarlabs.app/webhook';
+const API_BASE_URL = '/api';
 
 /**
  * Serviço de autenticação

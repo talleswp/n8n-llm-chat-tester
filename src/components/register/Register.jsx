@@ -65,7 +65,7 @@ const Register = ({ onBackToLogin }) => {
           <div className="row justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 col-12">
               <div className="card register-card overflow-hidden">
-                <div className="p-4 p-md-5 text-center">
+                <div className="p-10 p-md-10 text-center">
                   <div className="success-icon">✓</div>
                   <h2 className="h4 mb-2">Cadastro realizado com sucesso!</h2>
                   <p className="text-body-secondary">Redirecionando para o login...</p>
@@ -84,7 +84,7 @@ const Register = ({ onBackToLogin }) => {
         <div className="row justify-content-center">
           <div className="col-xl-5 col-lg-6 col-md-8 col-12">
             <div className="card register-card overflow-hidden">
-              <div className="p-4 p-md-5">
+              <div className="p-10 p-md-10">
                     <h1 className="h3 text-center mb-1">Criar Conta</h1>
                     <p className="text-center text-body-secondary">Preencha os dados para se cadastrar</p>
 
