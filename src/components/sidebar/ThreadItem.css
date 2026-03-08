@@ -4,3 +4,30 @@
   color: var(--bs-primary);
   font-weight: 500;
 }
+
+/* Thread Action Buttons — hidden by default, shown on hover */
+.thread-item .thread-actions {
+  display: none !important;
+}
+
+.thread-item:hover .thread-actions {
+  display: flex !important;
+}
+
+.thread-item:hover .thread-time {
+  display: none !important;
+}
+
+.thread-action-btn {
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.thread-action-btn:hover {
+  opacity: 1;
+}
+
+.thread-action-btn .bi-trash:hover {
+  color: var(--bs-danger) !important;
+}

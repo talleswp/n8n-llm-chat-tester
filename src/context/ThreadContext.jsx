@@ -92,6 +92,25 @@ const ThreadProvider = ({ children }) => {
     });
   };
 
+  /**
+   * Deleta uma thread da lista (local)
+   */
+  const deleteThread = (threadId) => {
+    setThreads(prev => prev.filter(t => t.thread_id !== threadId));
+    if (activeThreadId === threadId) {
+      setActiveThreadId(null);
+    }
+  };
+
+  /**
+   * Renomeia uma thread (local)
+   */
+  const renameThread = (threadId, newName) => {
+    setThreads(prev =>
+      prev.map(t => t.thread_id === threadId ? { ...t, name: newName } : t)
+    );
+  };
+
   // Carrega threads ao montar ou quando token muda
   useEffect(() => {
     if (token) {
@@ -111,6 +130,8 @@ const ThreadProvider = ({ children }) => {
     selectThread,
     createNewThread,
     upsertThread,
+    deleteThread,
+    renameThread,
   };
 
   return (

@@ -5,7 +5,7 @@ import UserMenu from './UserMenu';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen, onToggle, user, onLogout }) => {
-  const { threads, activeThreadId, createNewThread, selectThread, isLoadingThreads } = useThreads();
+  const { threads, activeThreadId, createNewThread, selectThread, deleteThread, renameThread, isLoadingThreads } = useThreads();
 
   const handleNewChat = () => {
     createNewThread();
@@ -75,6 +75,8 @@ const Sidebar = ({ isOpen, onToggle, user, onLogout }) => {
                 thread={thread}
                 isActive={thread.thread_id === activeThreadId}
                 onClick={() => handleSelectThread(thread.thread_id)}
+                onDelete={deleteThread}
+                onRename={renameThread}
               />
             ))}
           </ul>

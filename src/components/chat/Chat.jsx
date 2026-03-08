@@ -155,7 +155,13 @@ const Chat = () => {
               <main className="container-fluid py-5">
                 <div className="mx-auto" style={{ maxWidth: '768px' }}>
                   <div className="my-5 text-center">
-                    <h1 className="h1" style={{ letterSpacing: '-0.025em' }}>
+                    <h1 className="h1" style={{
+                      letterSpacing: '-0.025em',
+                      background: 'linear-gradient(90deg, #6d33b4 30%, #2d1b69 55%, #7b2ff7 80%, #c084fc 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}>
                       {user?.name ? `Hello ${user.name.split(' ')[0]} 👋` : 'Como posso ajudar?'}
                     </h1>
                     <p className="px-lg-5 mt-4 text-body-secondary">
