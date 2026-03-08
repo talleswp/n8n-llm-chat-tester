@@ -23,12 +23,8 @@ const Sidebar = ({ isOpen, onToggle, user, onLogout }) => {
 
         {/* Brand / Workspace */}
         <div className="px-4 py-2">
-          <div className="d-flex align-items-center gap-3 px-2 py-2 rounded bg-accent-hover">
-            <i class="bi bi-globe-central-south-asia-fill"></i>
-            <div className="d-grid flex-grow-1" style={{ lineHeight: 1.2 }}>
-              <span className="text-truncate fw-semibold" style={{ fontSize: '14px' }}>N-SPACE</span>
-              <span className="text-truncate text-body-secondary" style={{ fontSize: '11px', marginTop: '-1px' }}>Business</span>
-            </div>
+          <div className="d-flex align-items-center gap-3 px-2 py-6 rounded bg-accent-hover">
+            <img src="/img/logo-n-space-white.svg" alt="N-SPACE" className="logo-reveal" style={{ height: '28px' }} />
           </div>
         </div>
 
