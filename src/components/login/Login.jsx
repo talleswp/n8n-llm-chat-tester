@@ -54,11 +54,8 @@ const Login = ({ onRegisterClick }) => {
                 {/* Formulário */}
                 <div className="col-md-6">
                   <div className="p-10 p-md-10">
-                    <div className="text-center mb-3">
-                      <span className="nspace-title d-inline-flex align-items-center gap-2" style={{ fontSize: '1rem', fontWeight: 500, letterSpacing: '1px' }}>
-                        <i className="bi bi-globe-central-south-asia-fill"></i>
-                        N-SPACE
-                      </span>
+                    <div className="text-center mb-10">
+                      <img src="/img/n-space.svg" alt="N-SPACE" className="logo-reveal" style={{ height: '30px' }} />
                     </div>
                     <h1 className="h3 text-center mb-1">Log in</h1>
                     <p className="text-center text-body-secondary">Log in to your account</p>

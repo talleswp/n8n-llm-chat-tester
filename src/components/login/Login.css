@@ -24,6 +24,24 @@
   100% { background-position: -200% center; }
 }
 
+/* Logo reveal animation */
+.logo-reveal {
+  animation: logoReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(12px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
 /* Background gradiente animado */
 .login-page {
   background: linear-gradient(135deg, #0a0a1a 0%, #1a0533 30%, #2d1b69 55%, #7b2ff7 80%, #c084fc 100%);
