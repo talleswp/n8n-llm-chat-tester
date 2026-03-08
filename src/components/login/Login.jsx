@@ -97,19 +97,6 @@ const Login = ({ onRegisterClick }) => {
                         {isLoading ? 'Entrando...' : 'Entrar'}
                       </button>
 
-                      <div className="text-center mt-4 mb-3 text-white small">Ou continue com</div>
-                      <div className="d-flex gap-2">
-                        <button type="button" className="btn btn-sm btn-neutral flex-grow-1">
-                          <i className="bi bi-apple"></i>
-                        </button>
-                        <button type="button" className="btn btn-sm btn-neutral flex-grow-1">
-                          <i className="bi bi-github"></i>
-                        </button>
-                        <button type="button" className="btn btn-sm btn-neutral flex-grow-1">
-                          <i className="bi bi-google"></i>
-                        </button>
-                      </div>
-
                       <div className="text-center mt-4 small text-white">
                         Não tem uma conta?{' '}
                         <a
@@ -130,9 +117,6 @@ const Login = ({ onRegisterClick }) => {
               </div>
             </div>
 
-            <div className="text-center small mt-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              A IA pode cometer erros. Verifique informações importantes.
-            </div>
           </div>
         </div>
       </div>

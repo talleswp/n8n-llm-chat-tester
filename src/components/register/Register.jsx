@@ -185,10 +185,7 @@ const Register = ({ onBackToLogin }) => {
                     </form>
               </div>
             </div>
-
-            <div className="text-center small mt-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              A IA pode cometer erros. Verifique informações importantes.
-            </div>
+            
           </div>
         </div>
       </div>

@@ -224,14 +224,6 @@ const Chat = () => {
                             <i className="bi bi-paperclip"></i>
                             <span className="ms-1">Anexar</span>
                           </label>
-                          <button type="button" className="btn btn-sm btn-neutral">
-                            <i className="bi bi-soundwave"></i>
-                            <span className="ms-1">Mensagem de voz</span>
-                          </button>
-                          <button type="button" className="btn btn-sm btn-neutral">
-                            <i className="bi bi-files"></i>
-                            <span className="ms-1 d-none d-sm-inline-block">Prompts</span>
-                          </button>
                           <button
                             type="button"
                             onClick={handleSubmit}
@@ -251,33 +243,6 @@ const Chat = () => {
                           </button>
                         </div>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Quick Prompts */}
-                  <div className="mt-5">
-                    <h6 className="text-center">Escolha um prompt rápido</h6>
-                    <div className="d-flex justify-content-center gap-2 flex-wrap mt-4">
-                      <button type="button" className="btn btn-sm btn-light rounded-pill">
-                        <i className="bi bi-image text-warning"></i>
-                        <span className="ms-2">Criar imagem</span>
-                      </button>
-                      <button type="button" className="btn btn-sm btn-light rounded-pill">
-                        <i className="bi bi-code" style={{ color: '#7c3aed' }}></i>
-                        <span className="ms-2">Analisar código</span>
-                      </button>
-                      <button type="button" className="btn btn-sm btn-light rounded-pill">
-                        <i className="bi bi-file-text text-success"></i>
-                        <span className="ms-2">Resumir texto</span>
-                      </button>
-                      <button type="button" className="btn btn-sm btn-light rounded-pill">
-                        <i className="bi bi-list-check text-info"></i>
-                        <span className="ms-2">Fazer um plano</span>
-                      </button>
-                      <button type="button" className="btn btn-sm btn-light rounded-pill">
-                        <i className="bi bi-stars text-danger"></i>
-                        <span className="ms-2">Surpreenda-me</span>
-                      </button>
                     </div>
                   </div>
 
