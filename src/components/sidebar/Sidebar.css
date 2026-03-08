@@ -35,6 +35,14 @@
   color: var(--bs-body-color);
   font-weight: 500;
   transition: background-color 0.15s;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Thread List ===== */
+.sidebar .nav {
+  overflow-x: hidden;
 }
 
 /* ===== Scrollbar ===== */
