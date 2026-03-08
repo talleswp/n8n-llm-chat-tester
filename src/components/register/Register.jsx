@@ -20,27 +20,27 @@ const Register = ({ onBackToLogin }) => {
 
     // Validações
     if (!name.trim()) {
-      setError('Por favor, insira seu nome');
+      setError('Please enter your name.');
       return;
     }
 
     if (!email.trim()) {
-      setError('Por favor, insira seu email');
+      setError('Please enter your email.');
       return;
     }
 
     if (!password) {
-      setError('Por favor, insira uma senha');
+      setError('Please enter your password.');
       return;
     }
 
     if (password.length < 6) {
-      setError('A senha deve ter no mínimo 6 caracteres');
+      setError('Password must be at least 6 characters long.');
       return;
     }
 
     if (password !== confirmPassword) {
-      setError('As senhas não coincidem');
+      setError('Passwords do not match.');
       return;
     }
 
@@ -110,18 +110,18 @@ const Register = ({ onBackToLogin }) => {
           <div className="col-xl-5 col-lg-6 col-md-8 col-12">
             <div className="card login-card overflow-hidden border-0">
               <div className="p-10 p-md-10">
-                    <h1 className="h3 text-center mb-1">Criar Conta</h1>
-                    <p className="text-center text-body-secondary">Preencha os dados para se cadastrar</p>
+                    <h1 className="h3 text-center mb-1">Create Account</h1>
+                    <p className="text-center text-body-secondary">Fill in the details to create your account</p>
 
                     <form onSubmit={handleSubmit} className="mt-4">
                       <div className="form-group">
-                        <label htmlFor="name">Nome completo</label>
+                        <label htmlFor="name">Full Name</label>
                         <input
                           id="name"
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          placeholder="Seu nome completo"
+                          placeholder="Your full name"
                           disabled={isLoading}
                           autoFocus
                         />
@@ -138,19 +138,19 @@ const Register = ({ onBackToLogin }) => {
                       <PasswordInput
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Mínimo 6 caracteres"
+                        placeholder="Minimum 6 characters"
                         disabled={isLoading}
                         autoComplete="new-password"
                       />
 
                       <div className="form-group">
-                        <label htmlFor="confirmPassword">Confirmar senha</label>
+                        <label htmlFor="confirmPassword">Confirm Password</label>
                         <input
                           id="confirmPassword"
                           type="password"
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
-                          placeholder="Digite a senha novamente"
+                          placeholder="Re-enter your password"
                           disabled={isLoading}
                           autoComplete="new-password"
                         />
@@ -169,17 +169,17 @@ const Register = ({ onBackToLogin }) => {
                         className="btn btn-sm btn-primary w-100 mt-3"
                         disabled={isLoading}
                       >
-                        {isLoading ? 'Criando conta...' : 'Criar conta'}
+                        {isLoading ? 'Creating account...' : 'Create account'}
                       </button>
 
                       <div className="text-center mt-4 small text-white">
-                        Já tem uma conta?{' '}
+                        Already have an account?{' '}
                         <a
                           href="#"
                           className="text-decoration-underline"
                           onClick={(e) => { e.preventDefault(); onBackToLogin(); }}
                         >
-                          Fazer login
+                          Log in
                         </a>
                       </div>
                     </form>

@@ -46,18 +46,9 @@ const UserMenu = ({ user, onLogout }) => {
           style={{ bottom: '100%', left: 0, right: 0, marginBottom: '4px', minWidth: '100%' }}
         >
           <div className="dropdown-header px-3">
-            <span className="d-block text-body-secondary" style={{ fontSize: '11px' }}>Conectado como:</span>
-            <span className="d-block fw-semibold" style={{ fontSize: '13px' }}>{user?.name || 'Usuário'}</span>
+            <span className="d-block text-body-secondary" style={{ fontSize: '11px' }}>Connected as:</span>
+            <span className="d-block fw-semibold" style={{ fontSize: '13px' }}>{user?.name || 'User'}</span>
           </div>
-          {/* <div className="dropdown-divider"></div> */}
-          {/* <a
-            className="dropdown-item d-flex align-items-center gap-2 px-3"
-            href="#"
-            onClick={(e) => { e.preventDefault(); setIsOpen(false); }}
-          >
-            <i className="bi bi-gear"></i>
-            <span>Configurações</span>
-          </a> */}
           <div className="dropdown-divider"></div>
           <a
             className="dropdown-item d-flex align-items-center gap-2 px-3 text-danger"
@@ -65,7 +56,7 @@ const UserMenu = ({ user, onLogout }) => {
             onClick={(e) => { e.preventDefault(); setIsOpen(false); onLogout(); }}
           >
             <i className="bi bi-box-arrow-right"></i>
-            <span>Sair</span>
+            <span>Logout</span>
           </a>
         </div>
       )}

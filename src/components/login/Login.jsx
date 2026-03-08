@@ -16,12 +16,12 @@ const Login = ({ onRegisterClick }) => {
 
     // Validações básicas
     if (!email.trim()) {
-      setLocalError('Por favor, insira seu email');
+      setLocalError('Please enter your email.');
       return;
     }
 
     if (!password) {
-      setLocalError('Por favor, insira sua senha');
+      setLocalError('Please enter your password.');
       return;
     }
 
@@ -61,7 +61,7 @@ const Login = ({ onRegisterClick }) => {
                       </span>
                     </div>
                     <h1 className="h3 text-center mb-1">Log in</h1>
-                    <p className="text-center text-body-secondary">Entre na sua conta</p>
+                    <p className="text-center text-body-secondary">Log in to your account</p>
 
                     <form onSubmit={handleSubmit} className="mt-4">
                       <EmailInput
@@ -94,17 +94,17 @@ const Login = ({ onRegisterClick }) => {
                         className="btn btn-sm btn-primary w-100 mt-3"
                         disabled={isLoading}
                       >
-                        {isLoading ? 'Entrando...' : 'Entrar'}
+                        {isLoading ? 'Logging in...' : 'Login'}
                       </button>
 
                       <div className="text-center mt-4 small text-white">
-                        Não tem uma conta?{' '}
+                        Don't have an account?{' '}
                         <a
                           href="#"
                           className="text-decoration-underline"
                           onClick={(e) => { e.preventDefault(); onRegisterClick(); }}
                         >
-                          Criar conta
+                          Create an account?
                         </a>
                       </div>
                     </form>

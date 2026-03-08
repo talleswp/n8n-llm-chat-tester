@@ -5,7 +5,7 @@ const PasswordInput = ({ value, onChange, placeholder, disabled, autoComplete })
 
   return (
     <div className="form-group">
-      <label htmlFor="password">Senha</label>
+      <label htmlFor="password">Password</label>
       <div className="password-input-wrapper">
         <input
           id="password"

@@ -156,10 +156,10 @@ const Chat = () => {
                 <div className="mx-auto" style={{ maxWidth: '768px' }}>
                   <div className="my-5 text-center">
                     <h1 className="h1" style={{ letterSpacing: '-0.025em' }}>
-                      {user?.name ? `Olá ${user.name.split(' ')[0]} 👋` : 'Como posso ajudar?'}
+                      {user?.name ? `Hello ${user.name.split(' ')[0]} 👋` : 'Como posso ajudar?'}
                     </h1>
                     <p className="px-lg-5 mt-4 text-body-secondary">
-                      Pergunte qualquer coisa, explore possibilidades e obtenha respostas instantâneas — tudo em um único prompt.
+                      Ask anything, explore possibilities, and get instant answers — all in a single prompt.
                     </p>
                   </div>
 
@@ -169,12 +169,7 @@ const Chat = () => {
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="d-inline-flex gap-3 align-items-center">
                           <i className="bi bi-textarea text-primary"></i>
-                          <span className="fw-semibold">Nova conversa</span>
-                        </div>
-                        <div className="d-flex gap-2 ms-auto">
-                          <button type="button" className="btn btn-sm btn-light d-inline-flex align-items-center justify-content-center" style={{ width: '2rem', height: '2rem', padding: 0 }}>
-                            <i className="bi bi-sliders"></i>
-                          </button>
+                          <span className="fw-semibold">New conversation</span>
                         </div>
                       </div>
                     </div>
@@ -205,7 +200,7 @@ const Chat = () => {
                         <textarea
                           ref={textareaRef}
                           className="form-control border-0 shadow-none p-0"
-                          placeholder="Como a IA pode ajudar você hoje?"
+                          placeholder="How can AI help you today?"
                           rows={3}
                           style={{ resize: 'none' }}
                           value={prompt}
@@ -222,7 +217,7 @@ const Chat = () => {
                               onChange={(e) => handleFileSelect(e.target.files[0])}
                             />
                             <i className="bi bi-paperclip"></i>
-                            <span className="ms-1">Anexar</span>
+                            <span className="ms-1">Attach</span>
                           </label>
                           <button
                             type="button"
@@ -248,7 +243,7 @@ const Chat = () => {
 
                   {/* Footer */}
                   <div className="text-center mt-5 text-body-secondary small">
-                    A IA pode cometer erros. Verifique informações importantes.
+                    AI can make mistakes. Verify important information.
                   </div>
                 </div>
               </main>
