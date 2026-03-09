@@ -189,7 +189,7 @@ const Chat = () => {
                       >
                         {isDragging && (
                           <div className="position-absolute top-0 start-0 end-0 bottom-0 rounded-3 d-flex align-items-center justify-content-center text-primary fw-semibold" style={{ zIndex: 10, pointerEvents: 'none', backgroundColor: 'rgba(var(--bs-primary-rgb), 0.05)' }}>
-                            Solte para anexar
+                            Release to attach
                           </div>
                         )}
                         {selectedFile && !isDragging && (
