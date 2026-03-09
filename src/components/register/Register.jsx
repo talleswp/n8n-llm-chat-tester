@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { authService } from '../../services/api.service';
 import EmailInput from '../common/EmailInput';
 import PasswordInput from '../common/PasswordInput';
+import Button from '../common/button/Button';
 import './Register.css';
 import '../login/Login.css';
 
@@ -164,13 +165,9 @@ const Register = ({ onBackToLogin }) => {
                       )}
 
                       {/* Botão Submit */}
-                      <button
-                        type="submit"
-                        className="btn btn-sm btn-primary w-100 mt-3"
-                        disabled={isLoading}
-                      >
-                        {isLoading ? 'Creating account...' : 'Create account'}
-                      </button>
+                      <Button isLoading={isLoading} loadingText="Creating account...">
+                        Create account
+                      </Button>
 
                       <div className="text-center mt-4 small text-white">
                         Already have an account?{' '}

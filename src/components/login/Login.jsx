@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import EmailInput from '../common/EmailInput';
 import PasswordInput from '../common/PasswordInput';
+import Button from '../common/button/Button';
 import './Login.css';
 
 const Login = ({ onRegisterClick }) => {
@@ -86,13 +87,9 @@ const Login = ({ onRegisterClick }) => {
                       )}
 
                       {/* Botão Submit */}
-                      <button
-                        type="submit"
-                        className="btn btn-sm btn-primary w-100 mt-3"
-                        disabled={isLoading}
-                      >
-                        {isLoading ? 'Logging in...' : 'Login'}
-                      </button>
+                      <Button isLoading={isLoading} loadingText="Logging in...">
+                        Login
+                      </Button>
 
                       <div className="text-center mt-4 small text-white">
                         Don't have an account?{' '}
