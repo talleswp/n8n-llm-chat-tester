@@ -55,10 +55,10 @@ const Login = ({ onRegisterClick }) => {
                 <div className="col-md-6">
                   <div className="p-10 p-md-10">
                     <div className="text-center mb-10">
-                      <img src="/img/n-space.svg" alt="N-SPACE" className="logo-reveal" style={{ height: '30px' }} />
+                      <img src="/img/n-space.svg" alt="N-Space" className="logo-reveal" style={{ height: '30px' }} />
                     </div>
                     <h1 className="h3 text-center mb-1">Log in</h1>
-                    <p className="text-center text-body-secondary">Log in to your account</p>
+                    <p className="text-center text-body-secondary">Sign in to your account</p>
 
                     <form onSubmit={handleSubmit} className="mt-4">
                       <EmailInput

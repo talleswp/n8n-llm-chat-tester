@@ -54,7 +54,7 @@ const Chat = () => {
               type="button"
               className="btn btn-sm btn-light border-0 shadow-none"
               onClick={toggleSidebar}
-              title={isSidebarOpen ? 'Fechar menu' : 'Abrir menu'}
+              title={isSidebarOpen ? 'Close menu' : 'Open menu'}
             >
               <i className="bi bi-layout-sidebar"></i>
             </button>
