@@ -35,7 +35,7 @@
 }
 
 .bubble.user-content {
-  background-color: var(--bs-primary);
+  background-color: #39229c;
   color: #fff;
   padding: 12px 20px;
   border-radius: 20px 20px 4px 20px;
@@ -50,14 +50,14 @@
 
 /* ===== Input box focus ring ===== */
 .input-box:focus-within {
-  border-color: var(--bs-primary) !important;
-  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), 0.15);
+  border-color: #601db1 !important;
+  box-shadow: 0 0 0 0.15rem rgba(96, 29, 177, 0.15);
 }
 
 /* ===== Card inner textarea focus ring ===== */
 .card-body .border:focus-within {
-  border-color: var(--bs-primary) !important;
-  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), 0.08);
+  border-color: #601db1 !important;
+  box-shadow: 0 0 0 0.15rem rgba(96, 29, 177, 0.08);
 }
 
 /* ===== File preview float animation ===== */

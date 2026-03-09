@@ -140,8 +140,8 @@ const Chat = () => {
                     <button
                       onClick={handleSubmit}
                       disabled={(!prompt.trim() && !selectedFile) || isLoading}
-                      className={`btn btn-sm rounded-circle d-flex align-items-center justify-content-center ms-2 ${prompt.trim() || selectedFile ? 'btn-primary' : 'btn-light text-secondary'}`}
-                      style={{ width: '38px', height: '38px', minWidth: '38px' }}
+                      className="btn btn-sm rounded-circle d-flex align-items-center justify-content-center ms-2 text-white"
+                      style={{ width: '38px', height: '38px', minWidth: '38px', backgroundColor: '#391176', borderColor: '#601db1', opacity: (!prompt.trim() && !selectedFile) || isLoading ? 0.5 : 1 }}
                     >
                       <i className="bi bi-arrow-up"></i>
                     </button>
@@ -162,7 +162,7 @@ const Chat = () => {
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
                     }}>
-                      {user?.name ? `Hello ${user.name.split(' ')[0]} 👋` : 'Como posso ajudar?'}
+                      {user?.name ? <>{`Hello ${user.name.split(' ')[0]}`}</> : 'Como posso ajudar?'}
                     </h1>
                     <p className="px-lg-5 mt-4 text-body-secondary">
                       Ask anything, explore possibilities, and get instant answers — all in a single prompt.
@@ -174,8 +174,8 @@ const Chat = () => {
                     <div className="card-header bg-transparent">
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="d-inline-flex gap-3 align-items-center">
-                          <i className="bi bi-textarea text-primary"></i>
-                          <span className="fw-semibold">New conversation</span>
+                          <i className="bi bi-textarea" style={{ color: '#601db1' }}></i>
+                          <span className="fw-semibold"  style={{ color: '#601db1' }}>New conversation</span>
                         </div>
                       </div>
                     </div>
@@ -229,7 +229,8 @@ const Chat = () => {
                             type="button"
                             onClick={handleSubmit}
                             disabled={(!prompt.trim() && !selectedFile) || isLoading}
-                            className="btn btn-sm btn-primary ms-auto"
+                            className="btn btn-sm ms-auto text-white"
+                            style={{ backgroundColor: '#601db1', borderColor: '#601db1' }}
                           >
                             {isLoading ? (
                               <>

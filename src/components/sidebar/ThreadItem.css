@@ -1,7 +1,7 @@
 /* Thread Active State */
 .nav-link.active {
-  background-color: var(--bs-primary-bg-subtle);
-  color: var(--bs-primary);
+  background-color: rgba(96, 29, 177, 0.12);
+  color: #601db1;
   font-weight: 500;
 }
 

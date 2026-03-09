@@ -22,12 +22,12 @@ const UserMenu = ({ user, onLogout }) => {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
       >
-        <div style={{ fontSize: '1.75rem', lineHeight: 1 }}>
+        <div style={{ fontSize: '1.75rem', lineHeight: 1, color: '#391176' }}>
           <i className="bi bi-person-circle"></i>
         </div>
         <div className="flex-fill" style={{ minWidth: 0 }}>
           <div className="d-flex align-items-center gap-2">
-            <span className="fw-semibold text-truncate" style={{ fontSize: '13px' }}>
+            <span className="fw-semibold text-truncate" style={{ fontSize: '13px', color: '#391176' }}>
               {user?.name || 'Usuário'}
             </span>
           </div>
