@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { authService } from '../../services/api.service';
-import EmailInput from '../common/EmailInput';
-import PasswordInput from '../common/PasswordInput';
+import FormInput from '../common/input/FormInput';
 import Button from '../common/button/Button';
 import './Register.css';
 import '../login/Login.css';
@@ -115,20 +114,21 @@ const Register = ({ onBackToLogin }) => {
                     <p className="text-center text-body-secondary">Fill in the details to create your account</p>
 
                     <form onSubmit={handleSubmit} className="mt-4">
-                      <div className="form-group">
-                        <label htmlFor="name">Full Name</label>
-                        <input
-                          id="name"
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="Your full name"
-                          disabled={isLoading}
-                          autoFocus
-                        />
-                      </div>
+                      <FormInput
+                        id="name"
+                        label="Full Name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Your full name"
+                        disabled={isLoading}
+                        autoFocus
+                      />
 
-                      <EmailInput
+                      <FormInput
+                        id="email"
+                        label="Email"
+                        type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="m@example.com"
@@ -136,7 +136,10 @@ const Register = ({ onBackToLogin }) => {
                         autoComplete="email"
                       />
 
-                      <PasswordInput
+                      <FormInput
+                        id="password"
+                        label="Password"
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Minimum 6 characters"
@@ -144,18 +147,16 @@ const Register = ({ onBackToLogin }) => {
                         autoComplete="new-password"
                       />
 
-                      <div className="form-group">
-                        <label htmlFor="confirmPassword">Confirm Password</label>
-                        <input
-                          id="confirmPassword"
-                          type="password"
-                          value={confirmPassword}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                          placeholder="Re-enter your password"
-                          disabled={isLoading}
-                          autoComplete="new-password"
-                        />
-                      </div>
+                      <FormInput
+                        id="confirmPassword"
+                        label="Confirm Password"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="Re-enter your password"
+                        disabled={isLoading}
+                        autoComplete="new-password"
+                      />
 
                       {/* Exibir Erros */}
                       {error && (

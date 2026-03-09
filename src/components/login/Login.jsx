@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import EmailInput from '../common/EmailInput';
-import PasswordInput from '../common/PasswordInput';
+import FormInput from '../common/input/FormInput';
 import Button from '../common/button/Button';
 import './Login.css';
 
@@ -62,7 +61,10 @@ const Login = ({ onRegisterClick }) => {
                     <p className="text-center text-body-secondary">Sign in to your account</p>
 
                     <form onSubmit={handleSubmit} className="mt-4">
-                      <EmailInput
+                      <FormInput
+                        id="email"
+                        label="Email"
+                        type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="m@example.com"
@@ -71,7 +73,10 @@ const Login = ({ onRegisterClick }) => {
                         autoFocus
                       />
 
-                      <PasswordInput
+                      <FormInput
+                        id="password"
+                        label="Password"
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••"
