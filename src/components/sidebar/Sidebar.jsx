@@ -39,7 +39,7 @@ const Sidebar = ({ isOpen, onToggle, user, onLogout }) => {
                 style={{ fontSize: '14px' }}
               >
                 <i className="bi bi-textarea"></i>
-                <span>New conversation</span>
+                <span>New chat</span>
               </a>
             </li>
           </ul>
@@ -48,19 +48,19 @@ const Sidebar = ({ isOpen, onToggle, user, onLogout }) => {
         {/* Threads List */}
         <div className="px-4 py-2 flex-fill overflow-y-auto sidebar-scrollbar">
           <div className="d-flex align-items-center mb-1">
-            <span className="d-block text-body-secondary fw-semibold me-auto" style={{ fontSize: '11px' }}>Recent conversations</span>
+            <span className="d-block text-body-secondary fw-semibold me-auto" style={{ fontSize: '11px' }}>Recent chats</span>
           </div>
 
           {isLoadingThreads && (
             <div className="text-center py-4 text-body-secondary small">
-              Loading conversations...
+              Loading chats...
             </div>
           )}
 
           {!isLoadingThreads && threads.length === 0 && (
             <div className="text-center py-4 text-body-secondary small">
-              <p className="mb-1">No conversations yet</p>
-              <p className="opacity-75 mb-0">Start a new conversation!</p>
+              <p className="mb-1">No chats yet</p>
+              <p className="opacity-75 mb-0">Start a new chat!</p>
             </div>
           )}
 
@@ -84,7 +84,7 @@ const Sidebar = ({ isOpen, onToggle, user, onLogout }) => {
 
           {/* Thread Count */}
           <div className="text-center text-body-secondary" style={{ fontSize: '11px' }}>
-            {threads.length} conversation{threads.length !== 1 ? 's' : ''}
+            {threads.length} chat{threads.length !== 1 ? 's' : ''}
           </div>
         </div>
       </nav>

@@ -83,7 +83,7 @@ const Chat = () => {
                   {isLoading && (
                     <div className="bubble-row ai mb-3">
                       <div className="bubble ai-content">
-                        <span className="fst-italic opacity-50 small">Gerando resposta...</span>
+                        <span className="fst-italic opacity-50 small">Generating response...</span>
                       </div>
                     </div>
                   )}
@@ -129,7 +129,7 @@ const Chat = () => {
                     <textarea
                       ref={textareaRef}
                       rows={1}
-                      placeholder={isDragging ? '' : 'Digite sua mensagem...'}
+                      placeholder={isDragging ? '' : 'Type your message...'}
                       className="form-control border-0 shadow-none bg-transparent flex-fill"
                       style={{ resize: 'none', maxHeight: '150px', fontSize: '15px' }}
                       value={prompt}
@@ -175,7 +175,7 @@ const Chat = () => {
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="d-inline-flex gap-3 align-items-center">
                           <i className="bi bi-textarea" style={{ color: '#601db1' }}></i>
-                          <span className="fw-semibold"  style={{ color: '#601db1' }}>New conversation</span>
+                          <span className="fw-semibold"  style={{ color: '#601db1' }}>New chat</span>
                         </div>
                       </div>
                     </div>
@@ -235,7 +235,7 @@ const Chat = () => {
                             {isLoading ? (
                               <>
                                 <span className="spinner-border spinner-border-sm me-1"></span>
-                                Enviando...
+                                Sending...
                               </>
                             ) : (
                               <>
