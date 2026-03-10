@@ -17,15 +17,16 @@
 .bubble-row {
   display: flex;
   flex-direction: column;
-  max-width: 85%;
 }
 
 .bubble-row.user {
-  align-self: flex-end;
+  align-self: flex-start;
+  align-items: flex-start;
 }
 
 .bubble-row.ai {
-  align-self: flex-start;
+  align-self: flex-end;
+  align-items: flex-end;
 }
 
 /* AI Inline Icon */
@@ -46,13 +47,13 @@
   background-color: #39229c;
   color: #fff;
   padding: 12px 20px;
-  border-radius: 20px 20px 4px 20px;
+  border-radius: 20px 20px 20px 4px;
 }
 
 .bubble.ai-content {
   background-color: var(--bs-body-bg);
   padding: 12px 16px;
-  border-radius: 4px 20px 20px 20px;
+  border-radius: 20px 20px 4px 20px;
   border: 1px solid var(--bs-border-color);
 }
 
