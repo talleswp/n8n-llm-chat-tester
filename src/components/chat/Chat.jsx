@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useChat } from '../../hooks/useChat';
+import { useThreads } from '../../hooks/useThreads';
 import Sidebar from '../sidebar/Sidebar';
 import './Chat.css';
 
 const Chat = () => {
   const { user, logout } = useAuth();
+  const { threads, activeThreadId } = useThreads();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const activeThread = threads.find(t => t.thread_id === activeThreadId);
   const {
     messages,
     prompt,
@@ -58,6 +61,9 @@ const Chat = () => {
             >
               <i className="bi bi-layout-sidebar"></i>
             </button>
+            {activeThread && (
+              <h2 className="mb-0 fs-5 fw-semibold text-truncate">{activeThread.name}</h2>
+            )}
           </div>
 
           {/* Chat Content */}
