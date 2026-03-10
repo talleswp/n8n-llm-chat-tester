@@ -38,6 +38,8 @@
   line-height: 1.7;
   white-space: pre-wrap;
   font-size: 15px;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .bubble.user-content {
