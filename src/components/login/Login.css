@@ -230,7 +230,7 @@
 }
 
 .login-image-col {
-  background-image: url('../../../public/img/spacebackround.png');
+  background-image: url('../../../public/img/spacebackround.webp');
   background-size: cover;
   background-position: center;
   min-height: 420px;
