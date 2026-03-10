@@ -28,6 +28,12 @@
   align-self: flex-start;
 }
 
+/* AI Inline Icon */
+.ai-icon {
+  color: #39229c;
+  font-size: 14px;
+}
+
 .bubble {
   line-height: 1.7;
   white-space: pre-wrap;

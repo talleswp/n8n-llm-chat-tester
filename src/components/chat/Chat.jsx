@@ -69,6 +69,9 @@ const Chat = () => {
                   {messages.map((msg, i) => (
                     <div key={i} className={`bubble-row ${msg.role} mb-3`}>
                       <div className={`bubble ${msg.role === 'user' ? 'user-content' : 'ai-content'}`}>
+                        {msg.role === 'ai' && (
+                          <i className="bi bi-rocket-takeoff ai-icon me-2"></i>
+                        )}
                         {msg.fileName && (
                           <div className="d-flex align-items-center gap-2 small mb-2 p-2 bg-body-secondary rounded opacity-75" style={{ width: 'fit-content' }}>
                             <span>📎</span>
@@ -83,6 +86,7 @@ const Chat = () => {
                   {isLoading && (
                     <div className="bubble-row ai mb-3">
                       <div className="bubble ai-content">
+                        <i className="bi bi-rocket-takeoff ai-icon me-2"></i>
                         <span className="fst-italic opacity-50 small">Generating response...</span>
                       </div>
                     </div>
