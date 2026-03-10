@@ -42,6 +42,29 @@
   }
 }
 
+/* Loading progress bar */
+.loading-bar-track {
+  width: 140px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #7b2ff7, #c084fc);
+  border-radius: 3px;
+  animation: loadingFill 2s ease-in-out infinite;
+}
+
+@keyframes loadingFill {
+  0%   { width: 0%; margin-left: 0%; }
+  50%  { width: 60%; margin-left: 20%; }
+  100% { width: 0%; margin-left: 100%; }
+}
+
 /* Background gradiente animado */
 .login-page {
   background: linear-gradient(135deg, #0a0a1a 0%, #1a0533 30%, #2d1b69 55%, #7b2ff7 80%, #c084fc 100%);

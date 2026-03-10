@@ -27,8 +27,11 @@ const AppContent = () => {
           <div className="effect-line line-3"></div>
           <div className="effect-line line-4"></div>
         </div>
-        <div className="position-relative" style={{ zIndex: 1 }}>
+        <div className="position-relative text-center" style={{ zIndex: 1 }}>
           <img src="/img/n-space.svg" alt="N-SPACE" className="logo-reveal" style={{ height: '40px' }} />
+          <div className="loading-bar-track mt-3 mx-auto">
+            <div className="loading-bar-fill"></div>
+          </div>
         </div>
       </div>
     );
