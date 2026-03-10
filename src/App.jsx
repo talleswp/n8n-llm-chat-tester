@@ -5,6 +5,7 @@ import { useAuth } from './hooks/useAuth';
 import Login from './components/login/Login.jsx';
 import Register from './components/register/Register.jsx';
 import Chat from './components/chat/Chat.jsx';
+import './components/login/Login.css';
 
 /**
  * Componente que gerencia a rota baseada em autenticação
@@ -15,15 +16,20 @@ const AppContent = () => {
 
   if (isLoading) {
     return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        background: '#1a1a1a',
-        color: '#e8eaed',
-      }}>
-        <div>Carregando...</div>
+      <div className="login-page d-flex align-items-center justify-content-center min-vh-100">
+        <div className="login-effects" aria-hidden="true">
+          <div className="effect-circle circle-1"></div>
+          <div className="effect-circle circle-2"></div>
+          <div className="effect-circle circle-3"></div>
+          <div className="effect-circle circle-4"></div>
+          <div className="effect-line line-1"></div>
+          <div className="effect-line line-2"></div>
+          <div className="effect-line line-3"></div>
+          <div className="effect-line line-4"></div>
+        </div>
+        <div className="position-relative" style={{ zIndex: 1 }}>
+          <img src="/img/n-space.svg" alt="N-SPACE" className="logo-reveal" style={{ height: '40px' }} />
+        </div>
       </div>
     );
   }
