@@ -106,6 +106,10 @@ const Login = ({ onRegisterClick }) => {
                           Create an account?
                         </a>
                       </div>
+
+                      <div className="text-center mt-10">
+                        <img src="/img/powererdby.svg" alt="Powered by" style={{ height: '60px', opacity: 0.7 }} />
+                      </div>
                     </form>
                   </div>
                 </div>
