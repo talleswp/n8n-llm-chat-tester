@@ -86,8 +86,8 @@ const Chat = () => {
                           <i className="bi bi-rocket-takeoff ai-icon me-2"></i>
                         )}
                         {msg.fileName && (
-                          <div className="d-flex align-items-center gap-2 small mb-2 p-2 bg-body-secondary rounded opacity-75" style={{ width: 'fit-content' }}>
-                            <span>📎</span>
+                          <div className="d-flex align-items-center text-black bg-white bg-white-opacity-25 gap-2 small mb-2 p-2 rounded opacity-75" style={{ width: 'fit-content' }}>
+                            <i className="bi bi-paperclip fs-5"></i>
                             <span>{msg.fileName}</span>
                           </div>
                         )}
