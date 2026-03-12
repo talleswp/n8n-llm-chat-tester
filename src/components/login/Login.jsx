@@ -56,6 +56,9 @@ const Login = ({ onRegisterClick }) => {
                   <div className="p-10 p-md-10">
                     <div className="text-center mb-10">
                       <img src="/img/n-space.svg" alt="N-Space" className="logo-reveal" style={{ height: '30px' }} />
+                      <p className="text-body-secondary small mt-2 mb-0 px-2" style={{ opacity: 0.7 }}>
+                        Real-time AI connected to your n8n workflows.
+                      </p>
                     </div>
                     <h1 className="h3 text-center mb-1">Log in</h1>
                     <p className="text-center text-body-secondary">Sign in to your account</p>
