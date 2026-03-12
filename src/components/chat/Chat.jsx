@@ -64,6 +64,13 @@ const Chat = () => {
             {activeThread && (
               <h2 className="mb-0 fs-5 fw-semibold text-truncate">{activeThread.name}</h2>
             )}
+            <button
+              type="button"
+              className="btn btn-sm btn-light border-0 shadow-none ms-auto"
+              title="Options"
+            >
+              <i className="bi bi-three-dots-vertical"></i>
+            </button>
           </div>
 
           {/* Chat Content */}
