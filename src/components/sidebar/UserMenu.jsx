@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const UserMenu = ({ user, onLogout }) => {
+const UserMenu = ({ user, onLogout, onSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -49,6 +49,15 @@ const UserMenu = ({ user, onLogout }) => {
             <span className="d-block text-body-secondary" style={{ fontSize: '11px' }}>Connected as:</span>
             <span className="d-block fw-semibold" style={{ fontSize: '13px' }}>{user?.name || 'User'}</span>
           </div>
+          <div className="dropdown-divider"></div>
+          <a
+            className="dropdown-item d-flex align-items-center gap-2 px-3"
+            href="#"
+            onClick={(e) => { e.preventDefault(); setIsOpen(false); onSettings?.(); }}
+          >
+            <i className="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
           <div className="dropdown-divider"></div>
           <a
             className="dropdown-item d-flex align-items-center gap-2 px-3 text-danger"
