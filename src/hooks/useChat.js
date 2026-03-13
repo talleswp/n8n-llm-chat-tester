@@ -98,7 +98,6 @@ export const useChat = () => {
       
       setMessages(formattedMessages);
     } catch (error) {
-      console.error('Erro ao carregar histórico:', error);
       setMessages([{
         role: 'ai',
         content: 'Erro ao carregar histórico da conversa.',
@@ -175,7 +174,6 @@ export const useChat = () => {
       setMessages(prev => [...prev, { role: 'ai', content: aiContent }]);
 
     } catch (error) {
-      console.error(error);
       setMessages(prev => [...prev, {
         role: 'ai',
         content: `Erro: ${error.message}. Verifique o CORS e a URL.`,

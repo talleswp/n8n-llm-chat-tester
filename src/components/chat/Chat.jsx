@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useChat } from '../../hooks/useChat';
 import { useThreads } from '../../hooks/useThreads';
+import { useRag } from '../../hooks/useRag';
 import Sidebar from '../sidebar/Sidebar';
+import RagUploadModal from './RagUploadModal';
 import './Chat.css';
 
 const Chat = () => {
   const { user, logout } = useAuth();
   const { threads, activeThreadId } = useThreads();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isRagModalOpen, setIsRagModalOpen] = useState(false);
+  const rag = useRag();
   const activeThread = threads.find(t => t.thread_id === activeThreadId);
   const {
     messages,
@@ -48,6 +52,16 @@ const Chat = () => {
         <div className="sidebar-backdrop d-lg-none" onClick={toggleSidebar} />
       )}
 
+      <RagUploadModal
+        show={isRagModalOpen}
+        onClose={() => setIsRagModalOpen(false)}
+        isUploading={rag.isUploading}
+        uploadError={rag.uploadError}
+        hasRagDocument={rag.hasRagDocument}
+        handleRagUpload={rag.handleRagUpload}
+        clearUploadError={rag.clearUploadError}
+      />
+
       {/* Main Content Area */}
       <div className="flex-lg-fill overflow-x-auto vstack vh-100">
         <div className="flex-fill d-flex flex-column overflow-hidden mt-lg-2 bg-body rounded-top-start border-top-lg border-start-lg shadow-sm">
@@ -64,13 +78,23 @@ const Chat = () => {
             {activeThread && (
               <h2 className="mb-0 fs-5 fw-semibold text-truncate">{activeThread.name}</h2>
             )}
-            <button
-              type="button"
-              className="btn btn-sm btn-light border-0 shadow-none ms-auto"
-              title="Options"
-            >
-              <i className="bi bi-three-dots-vertical"></i>
-            </button>
+            <div className="position-relative ms-auto">
+              <button
+                type="button"
+                className="btn btn-sm btn-light border-0 shadow-none"
+                title="Upload RAG document"
+                onClick={() => setIsRagModalOpen(true)}
+              >
+                <i className="bi bi-three-dots-vertical"></i>
+              </button>
+              {rag.hasRagDocument && (
+                <span
+                  className="position-absolute top-0 end-0 translate-middle p-1 bg-success border border-2 border-white rounded-circle"
+                  style={{ width: '10px', height: '10px', transform: 'translate(25%, -25%)' }}
+                  title="RAG document active"
+                />
+              )}
+            </div>
           </div>
 
           {/* Chat Content */}

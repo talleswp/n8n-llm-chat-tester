@@ -172,3 +172,36 @@ export const threadService = {
     return response.json();
   },
 };
+
+/**
+ * Serviço de RAG (Retrieval-Augmented Generation)
+ */
+export const ragService = {
+  /**
+   * Faz upload de um documento para o índice RAG do usuário
+   * @param {File} file - Documento a ser indexado (PDF, DOCX, DOC, TXT, CSV)
+   * @param {string} userId - ID do usuário (user.id)
+   * @param {string} token - Token JWT de autenticação
+   * @returns {Promise<object>}
+   */
+  async uploadDocument(file, userId, token) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('user_id', userId);
+
+    const response = await fetch(`${API_BASE_URL}/llmchat/rag/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `Erro ${response.status}: Falha ao enviar documento`);
+    }
+
+    return response.json();
+  },
+};

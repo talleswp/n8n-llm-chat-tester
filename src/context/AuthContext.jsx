@@ -44,7 +44,6 @@ const AuthProvider = ({ children }) => {
             localStorage.removeItem(USER_KEY);
           }
         } catch (err) {
-          console.error('Erro ao carregar dados do localStorage:', err);
           localStorage.removeItem(TOKEN_KEY);
           localStorage.removeItem(USER_KEY);
         }

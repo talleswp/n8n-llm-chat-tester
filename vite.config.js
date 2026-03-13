@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   server: {
     proxy: {
       '/api': {
-        target: env.API_BASE_URL || 'https://localhost:5678/webhook-test/',
+        target: env.VITE_API_BASE_URL || 'https://localhost:5678/webhook-test/',
         changeOrigin: true,
         secure: true,
         rewrite: (path) => path.replace(/^\/api/, ''),

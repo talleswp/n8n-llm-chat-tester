@@ -22,7 +22,6 @@ const ThreadProvider = ({ children }) => {
     
     try {
       const response = await threadService.getThreads(token);
-      console.log('Dados recebidos do backend:', response);
       
       // Backend retorna {data: [{id: "...", created_at: "2025-12-04T21:06:38.777Z", name?: "..."}]}
       const rawThreads = response?.data || [];
@@ -35,10 +34,8 @@ const ThreadProvider = ({ children }) => {
         createdAt: thread.created_at, // Mantém created_at original
       }));
       
-      console.log('Threads processadas:', threadsArray);
       setThreads(threadsArray);
     } catch (err) {
-      console.error('Erro ao carregar threads:', err);
       setError(err.message);
       setThreads([]); // Garante que sempre seja um array
     } finally {
@@ -56,7 +53,6 @@ const ThreadProvider = ({ children }) => {
       const data = await threadService.getThreadHistory(threadId, token);
       return data;
     } catch (err) {
-      console.error('Erro ao carregar histórico:', err);
       throw err;
     }
   };
