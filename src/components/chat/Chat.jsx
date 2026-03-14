@@ -78,23 +78,6 @@ const Chat = () => {
             {activeThread && (
               <h2 className="mb-0 fs-5 fw-semibold text-truncate">{activeThread.name}</h2>
             )}
-            <div className="position-relative ms-auto">
-              <button
-                type="button"
-                className="btn btn-sm btn-light border-0 shadow-none"
-                title="Upload RAG document"
-                onClick={() => setIsRagModalOpen(true)}
-              >
-                <i className="bi bi-three-dots-vertical"></i>
-              </button>
-              {rag.hasRagDocument && (
-                <span
-                  className="position-absolute top-0 end-0 translate-middle p-1 bg-success border border-2 border-white rounded-circle"
-                  style={{ width: '10px', height: '10px', transform: 'translate(25%, -25%)' }}
-                  title="RAG document active"
-                />
-              )}
-            </div>
           </div>
 
           {/* Chat Content */}
@@ -157,15 +140,26 @@ const Chat = () => {
                       </div>
                     )}
 
-                    <label className="btn btn-sm border-0 bg-transparent text-secondary p-2" role="button" title="Anexar imagem">
+                    <label className="btn btn-sm border-0 bg-transparent text-secondary p-2 d-flex align-items-center gap-1" role="button" title="Anexar imagem">
                       <input
                         type="file"
                         accept="image/*"
                         style={{ display: 'none' }}
                         onChange={(e) => handleFileSelect(e.target.files[0])}
                       />
-                      <i className="bi bi-paperclip fs-5"></i>
+                      <i className="bi bi-file-earmark-image fs-5"></i>
+                      <span style={{ fontSize: '12px' }}>Image</span>
                     </label>
+
+                    <button
+                      type="button"
+                      className="btn btn-sm border-0 bg-transparent text-secondary p-2 d-flex align-items-center gap-1"
+                      title="Upload document (RAG)"
+                      onClick={() => setIsRagModalOpen(true)}
+                    >
+                      <i className="bi bi-file-earmark-arrow-up-fill fs-5"></i>
+                      <span style={{ fontSize: '12px' }}>Document</span>
+                    </button>
 
                     <textarea
                       ref={textareaRef}
@@ -263,9 +257,17 @@ const Chat = () => {
                               style={{ display: 'none' }}
                               onChange={(e) => handleFileSelect(e.target.files[0])}
                             />
-                            <i className="bi bi-paperclip"></i>
-                            <span className="ms-1">Attach</span>
+                            <i className="bi bi-file-earmark-image"></i>
+                            <span className="ms-1">Image</span>
                           </label>
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-neutral mb-0 d-flex align-items-center gap-1"
+                            onClick={() => setIsRagModalOpen(true)}
+                          >
+                            <i className="bi bi-file-earmark-arrow-up-fill"></i>
+                            <span>Document</span>
+                          </button>
                           <button
                             type="button"
                             onClick={handleSubmit}
