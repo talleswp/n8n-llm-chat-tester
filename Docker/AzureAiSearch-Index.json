@@ -1,0 +1,159 @@
+{
+  "@odata.etag": "\"0x8DE808DDA826DB0\"",
+  "name": "n8n-vectorstore",
+  "purviewEnabled": false,
+  "fields": [
+    {
+      "name": "id",
+      "type": "Edm.String",
+      "searchable": false,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": false,
+      "facetable": false,
+      "key": true,
+      "synonymMaps": []
+    },
+    {
+      "name": "content",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "synonymMaps": []
+    },
+    {
+      "name": "content_vector",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": false,
+      "stored": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "dimensions": 1536,
+      "vectorSearchProfile": "vector-search-profile",
+      "synonymMaps": []
+    },
+    {
+      "name": "metadata",
+      "type": "Edm.ComplexType",
+      "fields": [
+        {
+          "name": "source",
+          "type": "Edm.String",
+          "searchable": false,
+          "filterable": true,
+          "retrievable": true,
+          "stored": true,
+          "sortable": false,
+          "facetable": false,
+          "key": false,
+          "synonymMaps": []
+        },
+        {
+          "name": "attributes",
+          "type": "Collection(Edm.ComplexType)",
+          "fields": [
+            {
+              "name": "key",
+              "type": "Edm.String",
+              "searchable": false,
+              "filterable": true,
+              "retrievable": true,
+              "stored": true,
+              "sortable": false,
+              "facetable": false,
+              "key": false,
+              "synonymMaps": []
+            },
+            {
+              "name": "value",
+              "type": "Edm.String",
+              "searchable": false,
+              "filterable": true,
+              "retrievable": true,
+              "stored": true,
+              "sortable": false,
+              "facetable": false,
+              "key": false,
+              "synonymMaps": []
+            }
+          ]
+        },
+        {
+          "name": "user",
+          "type": "Edm.String",
+          "searchable": false,
+          "filterable": true,
+          "retrievable": false,
+          "stored": true,
+          "sortable": false,
+          "facetable": false,
+          "key": false,
+          "synonymMaps": []
+        }
+      ]
+    }
+  ],
+  "scoringProfiles": [],
+  "suggesters": [],
+  "analyzers": [],
+  "normalizers": [],
+  "tokenizers": [],
+  "tokenFilters": [],
+  "charFilters": [],
+  "similarity": {
+    "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+  },
+  "semantic": {
+    "defaultConfiguration": "semantic-search-config",
+    "configurations": [
+      {
+        "name": "semantic-search-config",
+        "flightingOptIn": false,
+        "rankingOrder": "BoostedRerankerScore",
+        "prioritizedFields": {
+          "prioritizedContentFields": [
+            {
+              "fieldName": "content"
+            }
+          ],
+          "prioritizedKeywordsFields": [
+            {
+              "fieldName": "content"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "vectorSearch": {
+    "algorithms": [
+      {
+        "name": "vector-search-algorithm",
+        "kind": "hnsw",
+        "hnswParameters": {
+          "metric": "cosine",
+          "m": 4,
+          "efConstruction": 400,
+          "efSearch": 500
+        }
+      }
+    ],
+    "profiles": [
+      {
+        "name": "vector-search-profile",
+        "algorithm": "vector-search-algorithm"
+      }
+    ],
+    "vectorizers": [],
+    "compressions": []
+  }
+}
